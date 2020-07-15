@@ -9,6 +9,7 @@ import ListItem from "@material-ui/core/ListItem"
 import ListItemIcon from "@material-ui/core/ListItemIcon"
 import ListItemText from "@material-ui/core/ListItemText"
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer"
+import Divider from '@material-ui/core/Divider';
 
 import NowPlayingIcon from "@material-ui/icons/PlaylistPlay"
 import PlayListIcon from "@material-ui/icons/List"
@@ -93,11 +94,10 @@ export default function Header() {
         onClose={toggleDrawer}
         onOpen={toggleDrawer}
       >
-        <div>
-            <Typography variant="h6" className={classes.title}>
-                Music App
-            </Typography>
+        <div style={{minHeight: "100px", justifyContent: 'center', width: '100%', display: 'flex', alignItems: 'center'}}>
+          <img src={require('../../images/favicon.png')} alt="Logo" />
         </div>
+        <Divider />
         {menuOptions.map(option => (
           <ListItem key={option.option} button className={classes.list}>
             <ListItemIcon>{option.icon}</ListItemIcon>

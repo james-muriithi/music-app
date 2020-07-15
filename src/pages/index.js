@@ -2,7 +2,8 @@ import React from "react"
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import deepPurple from '@material-ui/core/colors/deepPurple';
 
-import Layout from "../components/layout"
+import Layout from "../components/layout";
+import BottomPlayer from '../components/bottomPlayer/BottomPlayer';
 
 const IndexPage = () => {
   const muiTheme = createMuiTheme({
@@ -13,7 +14,8 @@ const IndexPage = () => {
   return (
     <MuiThemeProvider theme={muiTheme}>
       <Layout>
-        <h1>Hi people</h1>
+
+        <BottomPlayer />
       </Layout>
     </MuiThemeProvider>
   );
