@@ -137,8 +137,7 @@ const SEO = ({ title, desc, banner, pathname, article, node }) => {
   const breadcrumb = {
     "@context": "http://schema.org",
     "@type": "BreadcrumbList",
-    description:
-      "Your favorite online shop.",
+    description: "Your favorite online shop.",
     name: "E-Shop",
     itemListElement,
   }
