@@ -1,5 +1,5 @@
 {
-    "name": "Music App",
+    "name": "Music-App",
     "private": true,
     "description": "A simple reactjs, gatsby project to listen to local music.",
     "version": "0.1.0",
