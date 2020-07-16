@@ -136,3 +136,129 @@ button:focus {
         transform: translateX(-100%);
     }
 }
+
+@-webkit-keyframes quiet {
+    25% {
+        -webkit-transform: scaleY(0.6);
+        transform: scaleY(0.6);
+    }
+    50% {
+        -webkit-transform: scaleY(0.4);
+        transform: scaleY(0.4);
+    }
+    75% {
+        -webkit-transform: scaleY(0.8);
+        transform: scaleY(0.8);
+    }
+}
+
+@keyframes quiet {
+    25% {
+        -webkit-transform: scaleY(0.6);
+        transform: scaleY(0.6);
+    }
+    50% {
+        -webkit-transform: scaleY(0.4);
+        transform: scaleY(0.4);
+    }
+    75% {
+        -webkit-transform: scaleY(0.8);
+        transform: scaleY(0.8);
+    }
+}
+
+@-webkit-keyframes normal {
+    25% {
+        -webkit-transform: scaleY(1);
+        transform: scaleY(1);
+    }
+    50% {
+        -webkit-transform: scaleY(0.4);
+        transform: scaleY(0.4);
+    }
+    75% {
+        -webkit-transform: scaleY(0.6);
+        transform: scaleY(0.6);
+    }
+}
+
+@keyframes normal {
+    25% {
+        -webkit-transform: scaleY(1);
+        transform: scaleY(1);
+    }
+    50% {
+        -webkit-transform: scaleY(0.4);
+        transform: scaleY(0.4);
+    }
+    75% {
+        -webkit-transform: scaleY(0.6);
+        transform: scaleY(0.6);
+    }
+}
+
+@-webkit-keyframes loud {
+    25% {
+        -webkit-transform: scaleY(1);
+        transform: scaleY(1);
+    }
+    50% {
+        -webkit-transform: scaleY(0.4);
+        transform: scaleY(0.4);
+    }
+    75% {
+        -webkit-transform: scaleY(1.2);
+        transform: scaleY(1.2);
+    }
+}
+
+@keyframes loud {
+    25% {
+        -webkit-transform: scaleY(1);
+        transform: scaleY(1);
+    }
+    50% {
+        -webkit-transform: scaleY(0.4);
+        transform: scaleY(0.4);
+    }
+    75% {
+        -webkit-transform: scaleY(1.2);
+        transform: scaleY(1.2);
+    }
+}
+
+.boxContainer {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    height: 64px;
+    --boxSize: 8px;
+    --gutter: 4px;
+    width: calc((var(--boxSize) + var(--gutter)) * 5);
+}
+
+.box1 {
+    -webkit-animation-name: quiet;
+    animation-name: quiet;
+}
+
+.box2 {
+    -webkit-animation-name: normal;
+    animation-name: normal;
+}
+
+.box3 {
+    -webkit-animation-name: quiet;
+    animation-name: quiet;
+}
+
+.box4 {
+    -webkit-animation-name: loud;
+    animation-name: loud;
+}
+
+.box5 {
+    -webkit-animation-name: quiet;
+    animation-name: quiet;
+}
