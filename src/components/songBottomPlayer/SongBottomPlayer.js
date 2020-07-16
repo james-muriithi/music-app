@@ -11,8 +11,9 @@ import ShuffleIcon from "@material-ui/icons/Shuffle"
 import Repeat from "@material-ui/icons/Repeat"
 import RepeatOne from "@material-ui/icons/RepeatOne"
 import Slider from "@material-ui/core/Slider"
+import ValueLabel from '../valueLabel/ValueLabel';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(({
   root: {
     backgroundColor: "white",
     zIndex: 500,
@@ -21,6 +22,7 @@ const useStyles = makeStyles(theme => ({
     left: "0px",
     width: "100%",
     minHeight: "80px",
+    marginTop: '15px'
   },
   icon: {
     fontSize: "40px",
@@ -50,7 +52,6 @@ function BottomPlayer() {
   useEffect(() => {
     const isElementOverflowing = () => {
       const element = songTitle.current
-      console.log(element.scrollWidth)
       if (element.offsetWidth < element.scrollWidth) {
         setOverflow(true)
         return
@@ -73,7 +74,7 @@ function BottomPlayer() {
           style={{ textAlign: "center", whiteSpace: "nowrap" }}
         >
           {
-            "song.namesong.namesong.namesong.namesong.namesong.namesong.namesong.namesong.name"
+            "Hello There"
           }
         </Typography>
         <Typography
@@ -88,10 +89,10 @@ function BottomPlayer() {
         <Slider
           style={{ height: "2px" }}
           className={classes.slider}
+          valueLabelDisplay="auto"
+          valueLabelFormat={(value => value/10)}
           value={12}
-          max={100}
-          min={0}
-          defaultValue={2}
+          defaultValue={12}
         />
         <div style={{ display: "flex" }}>
           <div

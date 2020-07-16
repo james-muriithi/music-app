@@ -12,6 +12,7 @@ import SwipeableDrawer from "@material-ui/core/SwipeableDrawer"
 
 import SongHeader from "../songHeader/SongHeader"
 import SongBottomPlayer from "../songBottomPlayer/SongBottomPlayer"
+import SongMetaData from "../songMetadata/SongMetaData";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -84,10 +85,11 @@ function BottomPlayer() {
           style: { height: "100%" },
         }}
       >
-        <div>
+        <>
           <SongHeader toggleDrawer={toggleDrawer} />
+          <SongMetaData />
           <SongBottomPlayer />
-        </div>
+        </>
       </SwipeableDrawer>
     </>
   )
