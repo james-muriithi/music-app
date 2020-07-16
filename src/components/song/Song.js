@@ -28,7 +28,10 @@ export default function Song() {
             <MusicNote />
           </Avatar>
         </ListItemAvatar>
-        <ListItemText primary={`song.name`} secondary={"unknown artist"} />
+        <ListItemText
+          primary={`song.name`}
+          secondary={`unknown artist 03:26`}
+        />
         <ListItemSecondaryAction>
           <IconButton aria-label="Delete" onClick={handleIconClick}>
             <MoreVert />
@@ -42,13 +45,13 @@ export default function Song() {
         onClose={() => setAnchorEl(null)}
       >
         <MenuItem>
-                  <PlayIcon color='primary' /> Play next
+          <PlayIcon color="primary" /> Play next
         </MenuItem>
         <MenuItem>
-          <PlusIcon color='primary' /> Add to playlist
+          <PlusIcon color="primary" /> Add to playlist
         </MenuItem>
         <MenuItem>
-                  <DeleteIcon color='secondary' /> Delete
+          <DeleteIcon color="secondary" /> Delete
         </MenuItem>
       </Menu>
     </>

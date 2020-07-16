@@ -6,12 +6,13 @@ import deepOrange from "@material-ui/core/colors/deepOrange"
 import Layout from "../components/layout"
 import BottomPlayer from "../components/bottomPlayer/BottomPlayer"
 import SongsList from "../components/songsList/SongsList"
+import AddSong from "../components/fab/AddSong"
 
 const IndexPage = () => {
   const muiTheme = createMuiTheme({
     palette: {
       primary: deepPurple,
-      secondary: deepOrange
+      secondary: deepOrange,
     },
   })
   return (
@@ -19,6 +20,7 @@ const IndexPage = () => {
       <Layout>
         <SongsList />
         <BottomPlayer />
+        <AddSong />
       </Layout>
     </MuiThemeProvider>
   )
