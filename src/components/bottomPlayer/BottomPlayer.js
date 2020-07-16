@@ -12,7 +12,7 @@ import SwipeableDrawer from "@material-ui/core/SwipeableDrawer"
 
 import SongHeader from "../songHeader/SongHeader"
 import SongBottomPlayer from "../songBottomPlayer/SongBottomPlayer"
-import SongMetaData from "../songMetadata/SongMetaData";
+import SongMetaData from "../songMetadata/SongMetaData"
 
 const useStyles = makeStyles(theme => ({
   root: {

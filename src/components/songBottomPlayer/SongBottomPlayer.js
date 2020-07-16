@@ -12,7 +12,7 @@ import Repeat from "@material-ui/icons/Repeat"
 import RepeatOne from "@material-ui/icons/RepeatOne"
 import Slider from "@material-ui/core/Slider"
 
-const useStyles = makeStyles(({
+const useStyles = makeStyles({
   root: {
     backgroundColor: "white",
     zIndex: 500,
@@ -21,7 +21,7 @@ const useStyles = makeStyles(({
     left: "0px",
     width: "100%",
     minHeight: "80px",
-    marginTop: '15px'
+    marginTop: "15px",
   },
   icon: {
     fontSize: "40px",
@@ -38,7 +38,7 @@ const useStyles = makeStyles(({
     paddingTop: "6px",
     paddingBottom: "6px",
   },
-}))
+})
 
 function BottomPlayer() {
   const props = { width: "-200%" }
@@ -72,9 +72,7 @@ function BottomPlayer() {
           className={overflow ? "marquee" : ""}
           style={{ textAlign: "center", whiteSpace: "nowrap" }}
         >
-          {
-            "Hello There"
-          }
+          {"Hello There"}
         </Typography>
         <Typography
           variant="caption"
@@ -89,7 +87,7 @@ function BottomPlayer() {
           style={{ height: "2px" }}
           className={classes.slider}
           valueLabelDisplay="auto"
-          valueLabelFormat={(value => value/10)}
+          valueLabelFormat={value => value / 10}
           value={12}
           defaultValue={12}
         />
