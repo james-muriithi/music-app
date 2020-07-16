@@ -9,7 +9,7 @@ import ListItem from "@material-ui/core/ListItem"
 import ListItemIcon from "@material-ui/core/ListItemIcon"
 import ListItemText from "@material-ui/core/ListItemText"
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer"
-import Divider from '@material-ui/core/Divider';
+import Divider from "@material-ui/core/Divider"
 
 import NowPlayingIcon from "@material-ui/icons/PlaylistPlay"
 import PlayListIcon from "@material-ui/icons/List"
@@ -27,12 +27,12 @@ const useStyles = makeStyles(theme => ({
   title: {
     flexGrow: 1,
   },
-    list: {
-        width: 250,
-        [theme.breakpoints.down('sm')] : {
-            width: 230
-        }
-    }
+  list: {
+    width: 250,
+    [theme.breakpoints.down("sm")]: {
+      width: 230,
+    },
+  },
 }))
 
 export default function Header() {
@@ -60,15 +60,19 @@ export default function Header() {
       page: "SETTINGS_PAGE",
       icon: <SettingsIcon />,
     },
-  ];
+  ]
 
-    const toggleDrawer  = (event) => {
-        if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-            return;
-        }
+  const toggleDrawer = event => {
+    if (
+      event &&
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return
+    }
 
-        setOpen(prevState => !prevState)
-    };
+    setOpen(prevState => !prevState)
+  }
 
   return (
     <div className={classes.root}>
@@ -94,8 +98,16 @@ export default function Header() {
         onClose={toggleDrawer}
         onOpen={toggleDrawer}
       >
-        <div style={{minHeight: "100px", justifyContent: 'center', width: '100%', display: 'flex', alignItems: 'center'}}>
-          <img src={require('../../images/favicon.png')} alt="Logo" />
+        <div
+          style={{
+            minHeight: "100px",
+            justifyContent: "center",
+            width: "100%",
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
+          <img src={require("../../images/favicon.png")} alt="Logo" />
         </div>
         <Divider />
         {menuOptions.map(option => (
