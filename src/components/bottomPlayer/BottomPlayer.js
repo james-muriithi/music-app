@@ -8,10 +8,10 @@ import MusicNote from "@material-ui/icons/MusicNote"
 import PlayIcon from "@material-ui/icons/PlayArrowSharp"
 import Avatar from "@material-ui/core/Avatar"
 import IconButton from "@material-ui/core/IconButton"
-import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
+import SwipeableDrawer from "@material-ui/core/SwipeableDrawer"
 
-import SongHeader from '../songHeader/SongHeader';
-
+import SongHeader from "../songHeader/SongHeader"
+import SongBottomPlayer from "../songBottomPlayer/SongBottomPlayer"
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -34,7 +34,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 function BottomPlayer() {
-  const [ open, setOpen ] = useState(false)
+  const [open, setOpen] = useState(false)
   const classes = useStyles()
 
   const toggleDrawer = event => {
@@ -50,9 +50,12 @@ function BottomPlayer() {
   }
   return (
     <>
-      <Paper className={classes.root} onClick={()=>{
-        setOpen(true)
-      }} >
+      <Paper
+        className={classes.root}
+        onClick={() => {
+          setOpen(true)
+        }}
+      >
         <LinearProgress variant="determinate" value={12} />
         <div className="now-playing-container">
           <Avatar variant="square" className={classes.square}>
@@ -62,7 +65,7 @@ function BottomPlayer() {
             <Typography variant="body1">hello there</Typography>
             <Typography variant="caption" style={{ color: "#b2b2b2" }}>
               Unknown artist
-          </Typography>
+            </Typography>
           </div>
           <IconButton className={classes.icon}>
             <PlayIcon className={classes.icon} />
@@ -70,19 +73,20 @@ function BottomPlayer() {
         </div>
       </Paper>
       <SwipeableDrawer
-        anchor='bottom'
+        anchor="bottom"
         open={open}
         onClose={toggleDrawer}
         onOpen={toggleDrawer}
         ModalProps={{
-          style: {zIndex: 10000}
+          style: { zIndex: 10000 },
         }}
         PaperProps={{
-          style:{ height: '100%'}
+          style: { height: "100%" },
         }}
       >
         <div>
           <SongHeader toggleDrawer={toggleDrawer} />
+          <SongBottomPlayer />
         </div>
       </SwipeableDrawer>
     </>

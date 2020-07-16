@@ -10,7 +10,7 @@ module.exports = {
     twitter: `@jam_es_muriithi`,
     facebook: `james-muriithi`,
     banner: `/preview.png`,
-    theme: '#512DA8',
+    theme: "#512DA8",
   },
   plugins: [
     `gatsby-plugin-react-helmet`,

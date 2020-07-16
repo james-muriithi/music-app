@@ -1,4 +1,4 @@
-import React, {useState} from "react"
+import React, { useState } from "react"
 import PropTypes from "prop-types"
 import IconButton from "@material-ui/core/IconButton"
 import ListItem from "@material-ui/core/ListItem"
@@ -15,7 +15,7 @@ import PlusIcon from "@material-ui/icons/Add"
 import DeleteIcon from "@material-ui/icons/Delete"
 
 export default function Song() {
-  const [ anchorEl, setAnchorEl ] = useState(null)
+  const [anchorEl, setAnchorEl] = useState(null)
   const handleIconClick = event => {
     setAnchorEl(event.currentTarget)
   }

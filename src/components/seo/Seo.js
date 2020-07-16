@@ -27,7 +27,7 @@ const SEO = ({ title, desc, banner, pathname, article, node }) => {
       ogLanguage,
       author,
       twitter,
-      facebook
+      facebook,
     },
   } = site
 
