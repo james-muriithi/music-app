@@ -11,7 +11,6 @@ import ShuffleIcon from "@material-ui/icons/Shuffle"
 import Repeat from "@material-ui/icons/Repeat"
 import RepeatOne from "@material-ui/icons/RepeatOne"
 import Slider from "@material-ui/core/Slider"
-import ValueLabel from '../valueLabel/ValueLabel';
 
 const useStyles = makeStyles(({
   root: {
@@ -52,7 +51,7 @@ function BottomPlayer() {
   useEffect(() => {
     const isElementOverflowing = () => {
       const element = songTitle.current
-      if (element.offsetWidth < element.scrollWidth) {
+      if (element && element.offsetWidth < element.scrollWidth) {
         setOverflow(true)
         return
       }

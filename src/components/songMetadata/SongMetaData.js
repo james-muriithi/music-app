@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { makeStyles } from '@material-ui/core'
 
 // import MusicNote from '@material-ui/icons/MusicNote';
@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme =>({
             transform: 'scaleY(0.4)',
             height: '100%',
             width: 'var(--boxSize)',
-            background: theme.palette.primary.main,
+            background: theme.palette.secondary.main,
             WebkitAnimationDuration: '1.2s',
             animationDuration: '1.2s',
             WebkitAnimationTimingFunction: 'ease-in-out',
@@ -23,6 +23,18 @@ const useStyles = makeStyles(theme =>({
             WebkitAnimationIterationCount: 'infinite',
             animationIterationCount: 'infinite',
             borderRadius: 8,
+        },
+        '& .pause': {
+            '& .box':{
+                WebkitAnimationPlayState: 'paused',
+                animationPlayState: 'paused',
+            }
+        },
+        '& .play': {
+            '& .box':{
+                WebkitAnimationPlayState: 'running',
+                animationPlayState: 'running',
+            }
         }
     },
     musicNote:{
@@ -35,12 +47,16 @@ const useStyles = makeStyles(theme =>({
 }))
 export default function SongMetaData() {
     const classes = useStyles();
+    const [paused, setPaused] = useState(false)
+    setTimeout(() => {
+        setPaused(true)
+    }, 1000);
     return (
         <div className={classes.root}>
             {/* <Avatar className={classes.avatar}>
                 <MusicNote className={classes.musicNote} />
             </Avatar> */}
-            <div class="boxContainer">
+            <div class={`boxContainer ${paused? 'pause': 'play'}`}>
                 <div class="box box1"></div>
                 <div class="box box2"></div>
                 <div class="box box3"></div>
