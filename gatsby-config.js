@@ -10,6 +10,7 @@ module.exports = {
     twitter: `@jam_es_muriithi`,
     facebook: `james-muriithi`,
     banner: `/preview.png`,
+    theme: '#512DA8',
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -29,7 +30,7 @@ module.exports = {
         short_name: `starter`,
         start_url: `/`,
         background_color: `#663399`,
-        theme_color: `#673ab7`,
+        theme_color: `#512DA8`,
         display: `minimal-ui`,
         icon: `src/images/favicon.png`, // This path is relative to the root of the site.
       },
