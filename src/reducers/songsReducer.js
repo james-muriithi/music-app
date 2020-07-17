@@ -1,6 +1,10 @@
 import { ADD_SONGS, REMOVE_SONGS } from "../actions/types";
 
-export default (state=[], action) => {
+const initialState = {
+    songs: []
+}
+
+const SongsReducer = (state=initialState, action) => {
     switch (action.type) {
         case ADD_SONGS:
             return [ ...action.songs, ...state ];
@@ -8,6 +12,8 @@ export default (state=[], action) => {
             return state.songs.filter(song => song.id !== action.id);
         
         default:
-            break;
+            return state;
     }
 }
+
+export default SongsReducer;

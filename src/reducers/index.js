@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import SongsReducer from './songsReducer';
+import SongsReducer from './SongsReducer';
 
 export default combineReducers({
     songs: SongsReducer,
