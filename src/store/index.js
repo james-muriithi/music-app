@@ -16,4 +16,8 @@ const store = createStore(
     )
 )
 
+store.subscribe(() => {
+    localStorage.setItem("mySongs", JSON.stringify(store.getState()))
+})
+
 export default store;
