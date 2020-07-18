@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
 
 function AddSong(props) {
   const classes = useStyles()
-  console.log(props);
+  
   return (
     <Fab
       color="secondary"
@@ -46,8 +46,5 @@ AddSong.propTypes = {
   addSongs: PropTypes.func.isRequired
 }
 
-const mapStateToProps = state => ({
-  songs: state.songs 
-});
 
-export default connect(mapStateToProps, { addSongs})(AddSong);
+export default connect(null, { addSongs})(AddSong);
