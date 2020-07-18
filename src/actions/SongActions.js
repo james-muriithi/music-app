@@ -1,7 +1,6 @@
 import { ADD_SONGS, REMOVE_SONGS, PLAY_SONG, TOGGLE_PLAYING} from './types';
 
 export const addSongs = songs => dispatch => {
-    console.log(songs);
     dispatch({
         type: ADD_SONGS,
         songs

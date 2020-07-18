@@ -18,6 +18,7 @@ const useStyles = makeStyles(theme => ({
 
 function AddSong(props) {
   const classes = useStyles()
+  console.log(props);
   return (
     <Fab
       color="secondary"
@@ -31,7 +32,7 @@ function AddSong(props) {
         id="song-input"
         type="file"
         onChange={(e) => {
-          props.addSong(e.currentTarget.files);
+          props.addSongs(e.currentTarget.files);
         }}
         multiple
         accept="audio/mp3,audio/m4a"
@@ -45,4 +46,8 @@ AddSong.propTypes = {
   addSongs: PropTypes.func.isRequired
 }
 
-export default connect(null, { addSongs})(AddSong);
+const mapStateToProps = state => ({
+  songs: state.songs 
+});
+
+export default connect(mapStateToProps, { addSongs})(AddSong);
