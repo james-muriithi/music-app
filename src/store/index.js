@@ -1,11 +1,19 @@
 import { applyMiddleware, createStore, compose } from "redux";
 import thunk from 'redux-thunk';
+import * as LocalForage from 'localforage';
 
 import rootReducer from '../reducers';
 
-const initialState = {}
+let initialState = {}
 const middleware = [ thunk ]
 const globalWindow = typeof window !== "undefined" && window
+
+LocalForage.getItem('mySongs').then((state) => {
+    if (state !== null) {
+        initialState = state
+    }
+});
+
 
 const store = createStore(
     rootReducer,
@@ -17,7 +25,7 @@ const store = createStore(
 )
 
 store.subscribe(() => {
-    localStorage.setItem("mySongs", JSON.stringify(store.getState()))
+    LocalForage.setItem("mySongs", store.getState())
 })
 
 export default store;
