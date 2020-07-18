@@ -13,12 +13,17 @@ import MenuItem from "@material-ui/core/MenuItem"
 import PlayIcon from "@material-ui/icons/PlayArrowSharp"
 import PlusIcon from "@material-ui/icons/Add"
 import DeleteIcon from "@material-ui/icons/Delete"
+import {connect} from 'react-redux'
 
-export default function Song() {
+import {removeSong} from '../../actions/SongActions'
+
+function Song(props) {
   const [anchorEl, setAnchorEl] = useState(null)
   const handleIconClick = event => {
     setAnchorEl(event.currentTarget)
   }
+
+  const {song, removeSong: remove, song_id} = props;
 
   return (
     <>
@@ -28,8 +33,8 @@ export default function Song() {
             <MusicNote />
           </Avatar>
         </ListItemAvatar>
-        <ListItemText
-          primary={`song.name`}
+        <ListItemText 
+          primary={song.name}
           secondary={`unknown artist 03:26`}
         />
         <ListItemSecondaryAction>
@@ -50,10 +55,21 @@ export default function Song() {
         <MenuItem>
           <PlusIcon color="primary" /> Add to playlist
         </MenuItem>
-        <MenuItem>
+        <MenuItem onClick={()=>{
+          remove(song_id)
+        }}>
           <DeleteIcon color="secondary" /> Delete
         </MenuItem>
       </Menu>
     </>
   )
 }
+
+Song.protoTypes = {
+  song: PropTypes.object.isRequired,
+  removeSong: PropTypes.func.isRequired,
+  song_id: PropTypes.string.isRequired
+}
+
+
+export default connect(null, {removeSong})(Song);

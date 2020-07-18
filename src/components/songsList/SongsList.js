@@ -17,9 +17,9 @@ function SongsList(props) {
   console.log(songs);
   return (
     <List>
-      {songs.length && songs.map((song, i) => (
-        <div key={i}>
-          <Song />
+      {songs.length && songs.map((song, index) => (
+        <div key={index}>
+          <Song song={song} song_id={index} />
           <Divider />
         </div>
       ))}

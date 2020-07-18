@@ -6,7 +6,7 @@ const SongsReducer = (state=[], action) => {
         case ADD_SONGS:
             return [...action.songs, ...state]
         case REMOVE_SONGS:
-            return state.filter(song => song.id !== action.id);
+            return state.filter((song, index) => index !== action.id);
         
         default:
             return state;
