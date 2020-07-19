@@ -8,10 +8,26 @@ function AudioPlayer(props) {
 
     const audio_player = useRef(null)
 
+    const usePrevious = (value) => {
+        const ref = useRef();
+        useEffect(() => {
+            ref.current = value;
+        });
+        return ref.current;
+    }
+
+    const prevState = usePrevious({ playState });
+
     useEffect(() => {
-        if (playState.playing && songs[playState.songId]) {
-            audio_player.current.src = URL.createObjectURL(songs[ playState.songId ])
-            audio_player.current.play();
+        if (playState.playing && songs[playState.songId] ) {
+            if (prevState.playState.songId === -1 || prevState.playState.songId !== playState.songId) {
+                audio_player.current.src = URL.createObjectURL(songs[ playState.songId ])
+                audio_player.current.play();
+            }else{
+                audio_player.current.play();
+            }
+        }  else if (!playState.playing && songs[ playState.songId ]) {
+            audio_player.current.pause();
         }
     }, [playState])
 

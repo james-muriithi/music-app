@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-
+import PropTypes from 'prop-types'
 import { makeStyles, Typography } from "@material-ui/core"
 import LinearProgress from "@material-ui/core/LinearProgress"
 import Paper from "@material-ui/core/Paper"
@@ -9,10 +9,12 @@ import PlayIcon from "@material-ui/icons/PlayArrowSharp"
 import Avatar from "@material-ui/core/Avatar"
 import IconButton from "@material-ui/core/IconButton"
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer"
+import { connect } from "react-redux"
 
 import SongHeader from "../songHeader/SongHeader"
 import SongBottomPlayer from "../songBottomPlayer/SongBottomPlayer"
 import SongMetaData from "../songMetadata/SongMetaData"
+import { togglePlaying } from "../../actions/SongStateActions";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -34,7 +36,7 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-function BottomPlayer() {
+function BottomPlayer(props) {
   const [open, setOpen] = useState(false)
   const classes = useStyles()
 
@@ -49,27 +51,30 @@ function BottomPlayer() {
 
     setOpen(prevState => !prevState)
   }
+
+  const { playState, songs, togglePlaying } = props;
+
   return (
     <>
       <Paper
-        className={classes.root}
-        onClick={() => {
-          setOpen(true)
-        }}
-      >
+        className={classes.root}>
         <LinearProgress variant="determinate" value={12} />
         <div className="now-playing-container">
           <Avatar variant="square" className={classes.square}>
             <MusicNote style={{ fontSize: "35px" }} />
           </Avatar>
-          <div className="song-name">
-            <Typography variant="body1">hello there</Typography>
+          <div className="song-name" onClick={() => {
+            setOpen(true)
+          }}>
+            <Typography variant="body1">{playState.songId !== -1 ? songs[playState.songId].name : 'No Song'} </Typography>
             <Typography variant="caption" style={{ color: "#b2b2b2" }}>
               Unknown artist
             </Typography>
           </div>
-          <IconButton className={classes.icon}>
-            <PlayIcon className={classes.icon} />
+          <IconButton className={classes.icon} onClick={()=>{
+            togglePlaying(playState.songId)
+          }}>
+            {playState.playing ? <PauseIcon className={classes.icon} /> :<PlayIcon className={classes.icon} /> }
           </IconButton>
         </div>
       </Paper>
@@ -95,4 +100,15 @@ function BottomPlayer() {
   )
 }
 
-export default BottomPlayer
+const mapStateToProps = state => ({
+  songs: state.songs,
+  playState: state.playState
+})
+
+BottomPlayer.propTypes = {
+  songs: PropTypes.array.isRequired,
+  playState: PropTypes.object.isRequired,
+  togglePlaying: PropTypes.func.isRequired
+}
+
+export default connect(mapStateToProps, { togglePlaying })(BottomPlayer)

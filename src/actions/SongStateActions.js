@@ -1,4 +1,4 @@
-import { TOGGLE_PLAYING, PLAY_SONG } from "./types";
+import { TOGGLE_PLAYING, PLAY_SONG, UPDATE_TIME } from "./types";
 import mediaSession from '../utils/media-session';
 
 export const playSong = song_id => dispatch => {
