@@ -1,9 +1,10 @@
 import React, {useEffect, useRef} from 'react'
 import { connect } from "react-redux";
 import PropTypes from "prop-types"
+import { togglePlaying } from "../../actions/SongStateActions";
 
 function AudioPlayer(props) {
-    const {playState, songs} = props;
+    const {playState, songs, togglePlaying} = props;
 
     const audio_player = useRef(null)
 
@@ -14,11 +15,16 @@ function AudioPlayer(props) {
         }
     }, [playState])
 
+    const onSongEnded = () =>{
+        // for now 
+        togglePlaying(playState.songId)
+    }
+
     return (
         <audio
             hidden
             controls
-            // onEnded={this.songEnded}
+            onEnded={onSongEnded}
             // onTimeUpdate={this.updateTime}
             ref={audio_player}
         >
@@ -34,7 +40,8 @@ const mapStateToProps = state => ({
 
 AudioPlayer.propTypes = {
     songs: PropTypes.array.isRequired,
-    playState: PropTypes.object.isRequired
+    playState: PropTypes.object.isRequired,
+    togglePlaying: PropTypes.func.isRequired
 }
 
-export default connect(mapStateToProps,null)(AudioPlayer);
+export default connect(mapStateToProps,{togglePlaying})(AudioPlayer);

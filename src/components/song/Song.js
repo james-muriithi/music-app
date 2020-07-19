@@ -29,7 +29,7 @@ function Song(props) {
   const { song, removeSong: remove, song_id, playSong, playState } = props
 
   const showIcon = () =>{
-    if (playState && playState.songId == song_id) {
+    if (playState && playState.songId === song_id) {
       return <PlayingAnimation playing={playState.playing} />;
     }
     return <MusicNote />;
@@ -37,7 +37,7 @@ function Song(props) {
 
   return (
     <>
-      { playState.songId == song_id && <SEO title={song.name} />}
+      { playState.songId === song_id && <SEO title={song.name} />}
       <ListItem className="song" button={true} divider={true} onClick={()=>{
         playSong(song_id);
       }} >
@@ -46,7 +46,7 @@ function Song(props) {
             {showIcon()}
           </Avatar>
         </ListItemAvatar>
-        <ListItemText primary={song.name} secondary={`unknown artist 03:26`} />
+        <ListItemText primary={song.name} secondary={`unknown artist`} />
         <ListItemSecondaryAction>
           <IconButton aria-label="Delete" onClick={handleIconClick}>
             <MoreVert />

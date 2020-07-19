@@ -3,6 +3,7 @@ import { TOGGLE_PLAYING, PLAY_SONG } from "../actions/types";
 const initalState = {
     playing: false,
     songId: -1,
+    currentTime: 0
 };
 
 const SongStateReducer = (state = initalState, action) =>{

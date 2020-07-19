@@ -68,10 +68,10 @@ const useStyles = makeStyles(({
 export default function PlayingAnimation(props) {
     const classes = useStyles();
     return (
-        <div class={`${classes.root} ${props.playing ? 'play': 'pause'}`}>
-            <span class="playing__bar playing__bar1"></span>
-            <span class="playing__bar playing__bar2"></span>
-            <span class="playing__bar playing__bar3"></span>
+        <div className={`${classes.root} ${props.playing ? 'play': 'pause'}`}>
+            <span className="playing__bar playing__bar1"></span>
+            <span className="playing__bar playing__bar2"></span>
+            <span className="playing__bar playing__bar3"></span>
         </div>
     )
 }

@@ -5,7 +5,8 @@ import deepOrange from "@material-ui/core/colors/deepOrange"
 import { Provider } from "react-redux"
 
 import App from '../App'
-import store from "../store"
+import store from "../store";
+import mediaNotification from '../utils/media-session';
 
 const IndexPage = props => {
   const muiTheme = createMuiTheme({
@@ -13,7 +14,9 @@ const IndexPage = props => {
       primary: deepPurple,
       secondary: deepOrange,
     },
-  })
+  });
+
+  mediaNotification.setStore(store);
 
   return (
     <Provider store={store}>
