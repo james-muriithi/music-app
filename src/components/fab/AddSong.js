@@ -1,11 +1,11 @@
 import React from "react"
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types"
 import Fab from "@material-ui/core/Fab"
 import AddIcon from "@material-ui/icons/Add"
 import { makeStyles } from "@material-ui/core"
-import { connect } from "react-redux";
+import { connect } from "react-redux"
 
-import { addSongs } from "../../actions/SongActions";
+import { addSongs } from "../../actions/SongActions"
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
 
 function AddSong(props) {
   const classes = useStyles()
-  
+
   return (
     <Fab
       color="secondary"
@@ -31,8 +31,8 @@ function AddSong(props) {
         style={{ display: "none" }}
         id="song-input"
         type="file"
-        onChange={(e) => {
-          props.addSongs(e.currentTarget.files);
+        onChange={e => {
+          props.addSongs(e.currentTarget.files)
         }}
         multiple
         accept="audio/mp3,audio/m4a"
@@ -43,8 +43,7 @@ function AddSong(props) {
 }
 
 AddSong.propTypes = {
-  addSongs: PropTypes.func.isRequired
+  addSongs: PropTypes.func.isRequired,
 }
 
-
-export default connect(null, { addSongs})(AddSong);
+export default connect(null, { addSongs })(AddSong)
