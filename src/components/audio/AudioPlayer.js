@@ -4,7 +4,7 @@ import PropTypes from "prop-types"
 import { togglePlaying } from "../../actions/SongStateActions";
 
 function AudioPlayer(props) {
-    const {playState, songs, togglePlaying} = props;
+    const {playState, songs, togglePlaying, setCurrentTime} = props;
 
     const audio_player = useRef(null)
 
@@ -36,12 +36,17 @@ function AudioPlayer(props) {
         togglePlaying(playState.songId)
     }
 
+    const updateTime = () =>{
+        const currentTime = 100 * audio_player.current.currentTime / audio_player.current.duration || 0;
+        setCurrentTime(currentTime);
+    }
+
     return (
         <audio
             hidden
             controls
             onEnded={onSongEnded}
-            // onTimeUpdate={this.updateTime}
+            onTimeUpdate={updateTime}
             ref={audio_player}
         >
             <track kind="captions" {...{}} />
@@ -56,8 +61,12 @@ const mapStateToProps = state => ({
 
 AudioPlayer.propTypes = {
     songs: PropTypes.array.isRequired,
-    playState: PropTypes.object.isRequired,
-    togglePlaying: PropTypes.func.isRequired
+    playState: PropTypes.PropTypes.shape({
+        playing: PropTypes.bool.isRequired,
+        songId: PropTypes.number.isRequired,
+    }).isRequired,
+    togglePlaying: PropTypes.func.isRequired,
+    setCurrentTime: PropTypes.func.isRequired
 }
 
 export default connect(mapStateToProps,{togglePlaying})(AudioPlayer);

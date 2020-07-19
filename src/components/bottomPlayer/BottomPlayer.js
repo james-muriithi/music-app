@@ -52,13 +52,13 @@ function BottomPlayer(props) {
     setOpen(prevState => !prevState)
   }
 
-  const { playState, songs, togglePlaying } = props;
+  const { playState, songs, togglePlaying, currentTime } = props;
 
   return (
     <>
       <Paper
         className={classes.root}>
-        <LinearProgress variant="determinate" value={12} />
+        <LinearProgress variant="determinate" value={currentTime} />
         <div className="now-playing-container">
           <Avatar variant="square" className={classes.square}>
             <MusicNote style={{ fontSize: "35px" }} />
@@ -108,7 +108,8 @@ const mapStateToProps = state => ({
 BottomPlayer.propTypes = {
   songs: PropTypes.array.isRequired,
   playState: PropTypes.object.isRequired,
-  togglePlaying: PropTypes.func.isRequired
+  togglePlaying: PropTypes.func.isRequired,
+  currentTime: PropTypes.string.isRequired
 }
 
 export default connect(mapStateToProps, { togglePlaying })(BottomPlayer)
