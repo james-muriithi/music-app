@@ -4,10 +4,7 @@ import deepPurple from "@material-ui/core/colors/deepPurple"
 import deepOrange from "@material-ui/core/colors/deepOrange"
 import { Provider } from "react-redux"
 
-import Layout from "../components/layout"
-import BottomPlayer from "../components/bottomPlayer/BottomPlayer"
-import SongsList from "../components/songsList/SongsList"
-import AddSong from "../components/fab/AddSong"
+import App from '../App'
 import store from "../store"
 
 const IndexPage = props => {
@@ -21,11 +18,7 @@ const IndexPage = props => {
   return (
     <Provider store={store}>
       <MuiThemeProvider theme={muiTheme}>
-        <Layout>
-          <SongsList />
-          <BottomPlayer />
-          <AddSong />
-        </Layout>
+        <App />
       </MuiThemeProvider>
     </Provider>
   )
