@@ -4,5 +4,5 @@ import SongStateReducer from "./SongStateReducer"
 
 export default combineReducers({
   songs: SongsReducer,
-  playState: SongStateReducer
+  playState: SongStateReducer,
 })

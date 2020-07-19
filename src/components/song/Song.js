@@ -15,10 +15,10 @@ import PlusIcon from "@material-ui/icons/Add"
 import DeleteIcon from "@material-ui/icons/Delete"
 import { connect } from "react-redux"
 
-import { removeSong } from "../../actions/SongActions";
-import { playSong } from "../../actions/SongStateActions";
-import PlayingAnimation from "../playingAnimation";
-import SEO from '../seo/Seo';
+import { removeSong } from "../../actions/SongActions"
+import { playSong } from "../../actions/SongStateActions"
+import PlayingAnimation from "../playingAnimation"
+import SEO from "../seo/Seo"
 
 function Song(props) {
   const [anchorEl, setAnchorEl] = useState(null)
@@ -28,23 +28,26 @@ function Song(props) {
 
   const { song, removeSong: remove, song_id, playSong, playState } = props
 
-  const showIcon = () =>{
+  const showIcon = () => {
     if (playState && playState.songId === song_id) {
-      return <PlayingAnimation playing={playState.playing} />;
+      return <PlayingAnimation playing={playState.playing} />
     }
-    return <MusicNote />;
+    return <MusicNote />
   }
 
   return (
     <>
-      { playState.songId === song_id && <SEO title={song.name} />}
-      <ListItem className="song" button={true} divider={true} onClick={()=>{
-        playSong(song_id);
-      }} >
+      {playState.songId === song_id && <SEO title={song.name} />}
+      <ListItem
+        className="song"
+        button={true}
+        divider={true}
+        onClick={() => {
+          playSong(song_id)
+        }}
+      >
         <ListItemAvatar>
-          <Avatar>
-            {showIcon()}
-          </Avatar>
+          <Avatar>{showIcon()}</Avatar>
         </ListItemAvatar>
         <ListItemText primary={song.name} secondary={`unknown artist`} />
         <ListItemSecondaryAction>
@@ -83,11 +86,11 @@ Song.protoTypes = {
   removeSong: PropTypes.func.isRequired,
   song_id: PropTypes.string.isRequired,
   playSong: PropTypes.func.isRequired,
-  playState: PropTypes.object.isRequired
+  playState: PropTypes.object.isRequired,
 }
 
 const mapStateToProps = state => ({
-  playState: state.playState
+  playState: state.playState,
 })
 
 export default connect(mapStateToProps, { removeSong, playSong })(Song)

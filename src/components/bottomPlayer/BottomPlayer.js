@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import PropTypes from 'prop-types'
+import PropTypes from "prop-types"
 import { makeStyles, Typography } from "@material-ui/core"
 import LinearProgress from "@material-ui/core/LinearProgress"
 import Paper from "@material-ui/core/Paper"
@@ -14,7 +14,7 @@ import { connect } from "react-redux"
 import SongHeader from "../songHeader/SongHeader"
 import SongBottomPlayer from "../songBottomPlayer/SongBottomPlayer"
 import SongMetaData from "../songMetadata/SongMetaData"
-import { togglePlaying } from "../../actions/SongStateActions";
+import { togglePlaying } from "../../actions/SongStateActions"
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -52,29 +52,42 @@ function BottomPlayer(props) {
     setOpen(prevState => !prevState)
   }
 
-  const { playState, songs, togglePlaying, currentTime } = props;
+  const { playState, songs, togglePlaying, currentTime } = props
 
   return (
     <>
-      <Paper
-        className={classes.root}>
+      <Paper className={classes.root}>
         <LinearProgress variant="determinate" value={currentTime} />
         <div className="now-playing-container">
           <Avatar variant="square" className={classes.square}>
             <MusicNote style={{ fontSize: "35px" }} />
           </Avatar>
-          <div className="song-name" onClick={() => {
-            setOpen(true)
-          }}>
-            <Typography variant="body1">{playState.songId !== -1 ? songs[playState.songId].name : 'No Song'} </Typography>
+          <div
+            className="song-name"
+            onClick={() => {
+              setOpen(true)
+            }}
+          >
+            <Typography variant="body1">
+              {playState.songId !== -1
+                ? songs[playState.songId].name
+                : "No Song"}{" "}
+            </Typography>
             <Typography variant="caption" style={{ color: "#b2b2b2" }}>
               Unknown artist
             </Typography>
           </div>
-          <IconButton className={classes.icon} onClick={()=>{
-            togglePlaying(playState.songId)
-          }}>
-            {playState.playing ? <PauseIcon className={classes.icon} /> :<PlayIcon className={classes.icon} /> }
+          <IconButton
+            className={classes.icon}
+            onClick={() => {
+              togglePlaying(playState.songId)
+            }}
+          >
+            {playState.playing ? (
+              <PauseIcon className={classes.icon} />
+            ) : (
+              <PlayIcon className={classes.icon} />
+            )}
           </IconButton>
         </div>
       </Paper>
@@ -102,14 +115,14 @@ function BottomPlayer(props) {
 
 const mapStateToProps = state => ({
   songs: state.songs,
-  playState: state.playState
+  playState: state.playState,
 })
 
 BottomPlayer.propTypes = {
   songs: PropTypes.array.isRequired,
   playState: PropTypes.object.isRequired,
   togglePlaying: PropTypes.func.isRequired,
-  currentTime: PropTypes.string.isRequired
+  currentTime: PropTypes.string.isRequired,
 }
 
 export default connect(mapStateToProps, { togglePlaying })(BottomPlayer)
