@@ -1,6 +1,5 @@
 import React from "react"
 import PropTypes from "prop-types"
-import Divider from "@material-ui/core/Divider"
 import List from "@material-ui/core/List"
 import { connect } from "react-redux"
 
@@ -16,15 +15,12 @@ function SongsList(props) {
       </h4>
     )
   }
-  console.log(songs)
+  
   return (
     <List>
       {songs.length &&
         songs.map((song, index) => (
-          <div key={index}>
-            <Song song={song} song_id={index} />
-            <Divider />
-          </div>
+          <Song song={song} song_id={index} key={index} />
         ))}
     </List>
   )

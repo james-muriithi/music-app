@@ -15,7 +15,8 @@ import PlusIcon from "@material-ui/icons/Add"
 import DeleteIcon from "@material-ui/icons/Delete"
 import { connect } from "react-redux"
 
-import { removeSong } from "../../actions/SongActions"
+import { removeSong } from "../../actions/SongActions";
+import { playSong } from "../../actions/SongStateActions";
 
 function Song(props) {
   const [anchorEl, setAnchorEl] = useState(null)
@@ -23,11 +24,13 @@ function Song(props) {
     setAnchorEl(event.currentTarget)
   }
 
-  const { song, removeSong: remove, song_id } = props
+  const { song, removeSong: remove, song_id, playSong } = props
 
   return (
     <>
-      <ListItem className="song">
+      <ListItem className="song" button={true} divider={true} onClick={()=>{
+        playSong(song_id);
+      }} >
         <ListItemAvatar>
           <Avatar>
             <MusicNote />
@@ -69,6 +72,7 @@ Song.protoTypes = {
   song: PropTypes.object.isRequired,
   removeSong: PropTypes.func.isRequired,
   song_id: PropTypes.string.isRequired,
+  playSong: PropTypes.func.isRequired,
 }
 
-export default connect(null, { removeSong })(Song)
+export default connect(null, { removeSong, playSong })(Song)

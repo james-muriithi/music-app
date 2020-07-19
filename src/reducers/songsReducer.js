@@ -1,4 +1,4 @@
-import { ADD_SONGS, REMOVE_SONGS } from "../actions/types"
+import { ADD_SONGS, REMOVE_SONGS } from '../actions/types';
 
 const SongsReducer = (state = [], action) => {
   switch (action.type) {
