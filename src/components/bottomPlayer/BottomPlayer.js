@@ -48,6 +48,7 @@ function BottomPlayer(props) {
     playSong,
     playNext,
     playPrevious,
+    timeDrag,
   } = props
 
   const toggleDrawer = event => {
@@ -85,7 +86,7 @@ function BottomPlayer(props) {
             }}
           >
             <Typography variant="body1" noWrap>
-              {playState.songId !== -1
+              {playState.songId !== -1 && songs[playState.songId]
                 ? songs[playState.songId].name
                 : "No Song"}
             </Typography>
@@ -134,6 +135,7 @@ function BottomPlayer(props) {
             duration={duration}
             playNext={playNext}
             playPrevious={playPrevious}
+            timeDrag={timeDrag}
           />
         </>
       </SwipeableDrawer>
@@ -158,6 +160,7 @@ BottomPlayer.propTypes = {
   playPrevious: PropTypes.func.isRequired,
   currentTime: PropTypes.number.isRequired,
   duration: PropTypes.number.isRequired,
+  timeDrag: PropTypes.func.isRequired,
 }
 
 export default connect(mapStateToProps, { togglePlaying, playSong })(

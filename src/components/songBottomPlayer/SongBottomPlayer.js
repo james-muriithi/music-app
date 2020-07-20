@@ -53,9 +53,10 @@ function BottomPlayer(props) {
     duration,
     playNext,
     playPrevious,
+    timeDrag,
   } = props
 
-  const classes = useStyles({ width: "-200%" })
+  const classes = useStyles()
 
   const [overflow, setOverflow] = useState(false)
   const songTitle = useRef(null)
@@ -129,6 +130,7 @@ function BottomPlayer(props) {
               }}
               value={currentTime}
               defaultValue={0}
+              onChange={(_, newVal) => timeDrag(newVal)}
             />
           </Grid>
           <Grid item style={{ paddingRight: "12px" }}>
@@ -201,6 +203,7 @@ BottomPlayer.propTypes = {
   duration: PropTypes.number.isRequired,
   playNext: PropTypes.func.isRequired,
   playPrevious: PropTypes.func.isRequired,
+  timeDrag: PropTypes.func.isRequired,
 }
 
 export default connect(mapStateToProps, { togglePlaying })(BottomPlayer)

@@ -112,7 +112,7 @@ button:focus {
         -moz-transform: translateX(100%);
     }
     100% {
-        -moz-transform: translateX(-100%);
+        -moz-transform: translateX(-200%);
     }
 }
 
@@ -121,7 +121,7 @@ button:focus {
         -webkit-transform: translateX(100%);
     }
     100% {
-        -webkit-transform: translateX(-100%);
+        -webkit-transform: translateX(-200%);
     }
 }
 
@@ -132,9 +132,9 @@ button:focus {
         transform: translateX(100%);
     }
     100% {
-        -moz-transform: translateX(-100%);
-        -webkit-transform: translateX(-100%);
-        transform: translateX(-100%);
+        -moz-transform: translateX(-200%);
+        -webkit-transform: translateX(-200%);
+        transform: translateX(-200%);
     }
 }
 

@@ -4,7 +4,14 @@ import PropTypes from "prop-types"
 import { togglePlaying } from "../../actions/SongStateActions"
 
 function AudioPlayer(props) {
-  const { playState, songs, togglePlaying, setCurrentTime, setDuration } = props
+  const {
+    playState,
+    songs,
+    togglePlaying,
+    setCurrentTime,
+    setDuration,
+    dragTime,
+  } = props
 
   const audio_player = useRef(null)
 
@@ -33,6 +40,12 @@ function AudioPlayer(props) {
       audio_player.current.pause()
     }
   }, [playState])
+
+  useEffect(() => {
+    if (dragTime) {
+      audio_player.current.currentTime = dragTime
+    }
+  }, [dragTime])
 
   const onSongEnded = () => {
     // for now
@@ -73,6 +86,7 @@ AudioPlayer.propTypes = {
   togglePlaying: PropTypes.func.isRequired,
   setCurrentTime: PropTypes.func.isRequired,
   setDuration: PropTypes.func.isRequired,
+  timeDrag: PropTypes.number,
 }
 
 export default connect(mapStateToProps, { togglePlaying })(AudioPlayer)

@@ -11,12 +11,13 @@ import { togglePlaying, playSong } from "../actions/SongStateActions"
 function App(props) {
   const [currentTime, setCurrentTime] = useState(0)
   const [duration, setDuration] = useState(0)
+  const [dragTime, setDragTime] = useState(0)
   const { togglePlaying, playState, songs, playSong } = props
 
   const { songId } = playState
 
   const toggle = () => {
-    togglePlaying();
+    togglePlaying()
   }
 
   const playNext = () => {
@@ -27,15 +28,18 @@ function App(props) {
 
   const playPrevious = () => {
     URL.revokeObjectURL(songs[songId])
-    const prevSongId =
-      songId === 0 ? songs.length - 1 : songId - 1
+    const prevSongId = songId === 0 ? songs.length - 1 : songId - 1
     playSong(prevSongId)
+  }
+
+  const timeDrag = time => {
+    setDragTime(duration * (time / 100))
   }
 
   useEffect(() => {
     if (playState.playing && playState.songId === -1) {
       if (songs[0]) {
-        playSong(0);
+        playSong(0)
       }
     }
   }, [playState])
@@ -43,18 +47,23 @@ function App(props) {
   useEffect(() => {
     keyboardEvents({
       togglePlaying: toggle,
-    });
-  },[])
+    })
+  }, [])
 
   return (
     <Layout>
-      <AudioPlayer setCurrentTime={setCurrentTime} setDuration={setDuration} />
+      <AudioPlayer
+        setCurrentTime={setCurrentTime}
+        setDuration={setDuration}
+        dragTime={dragTime}
+      />
       <SongsList />
       <BottomPlayer
         currentTime={currentTime}
         duration={duration}
         playNext={playNext}
         playPrevious={playPrevious}
+        timeDrag={timeDrag}
       />
       <AddSong />
     </Layout>
