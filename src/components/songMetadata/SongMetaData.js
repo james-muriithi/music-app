@@ -1,5 +1,6 @@
-import React, { useState } from "react"
-import { makeStyles } from "@material-ui/core"
+import React from "react"
+import { makeStyles } from "@material-ui/core";
+import PropTypes from "prop-types";
 
 // import MusicNote from '@material-ui/icons/MusicNote';
 // import Avatar from '@material-ui/core/Avatar';
@@ -45,24 +46,31 @@ const useStyles = makeStyles(theme => ({
     width: "80px",
   },
 }))
-export default function SongMetaData() {
+function SongMetaData(props) {
   const classes = useStyles()
-  const [paused, setPaused] = useState(false)
-  setTimeout(() => {
-    setPaused(true)
-  }, 1000)
+  const {playState} = props
+
   return (
     <div className={classes.root}>
       {/* <Avatar className={classes.avatar}>
                 <MusicNote className={classes.musicNote} />
             </Avatar> */}
-      <div class={`boxContainer ${paused ? "pause" : "play"}`}>
-        <div class="box box1"></div>
-        <div class="box box2"></div>
-        <div class="box box3"></div>
-        <div class="box box4"></div>
-        <div class="box box5"></div>
+      <div className={`boxContainer ${playState.playing ? "play" : "pause"}`}>
+        <div className="box box1"></div>
+        <div className="box box2"></div>
+        <div className="box box3"></div>
+        <div className="box box4"></div>
+        <div className="box box5"></div>
       </div>
     </div>
   )
 }
+
+SongMetaData.propTypes = {
+  playState: PropTypes.shape({
+    playing: PropTypes.bool.isRequired,
+    songId: PropTypes.number
+  }).isRequired
+}
+
+export default SongMetaData;

@@ -39,6 +39,7 @@ const useStyles = makeStyles(theme => ({
 function BottomPlayer(props) {
   const [open, setOpen] = useState(false)
   const classes = useStyles()
+  const { playState, songs, togglePlaying, currentTime, duration } = props
 
   const toggleDrawer = event => {
     if (
@@ -49,15 +50,19 @@ function BottomPlayer(props) {
       return
     }
 
+    if (playState.songId === -1) {
+      return
+    }
+
     setOpen(prevState => !prevState)
   }
 
-  const { playState, songs, togglePlaying, currentTime } = props
+  const progressValue = (currentTime * 100) / duration
 
   return (
     <>
       <Paper className={classes.root}>
-        <LinearProgress variant="determinate" value={currentTime} />
+        <LinearProgress variant="determinate" value={progressValue} />
         <div className="now-playing-container">
           <Avatar variant="square" className={classes.square}>
             <MusicNote style={{ fontSize: "35px" }} />
@@ -65,13 +70,15 @@ function BottomPlayer(props) {
           <div
             className="song-name"
             onClick={() => {
-              setOpen(true)
+              if (playState.songId !== -1) {
+                setOpen(true)
+              }
             }}
           >
             <Typography variant="body1">
               {playState.songId !== -1
                 ? songs[playState.songId].name
-                : "No Song"}{" "}
+                : "No Song"}
             </Typography>
             <Typography variant="caption" style={{ color: "#b2b2b2" }}>
               Unknown artist
@@ -105,8 +112,8 @@ function BottomPlayer(props) {
       >
         <>
           <SongHeader toggleDrawer={toggleDrawer} />
-          <SongMetaData />
-          <SongBottomPlayer />
+          <SongMetaData playState={playState} />
+          <SongBottomPlayer currentTime={progressValue} duration = {duration}  />
         </>
       </SwipeableDrawer>
     </>
@@ -120,9 +127,13 @@ const mapStateToProps = state => ({
 
 BottomPlayer.propTypes = {
   songs: PropTypes.array.isRequired,
-  playState: PropTypes.object.isRequired,
+  playState: PropTypes.shape({
+    playing : PropTypes.bool.isRequired,
+    songId: PropTypes.number.isRequired
+  }).isRequired,
   togglePlaying: PropTypes.func.isRequired,
-  currentTime: PropTypes.string.isRequired,
+  currentTime: PropTypes.number.isRequired,
+  duration: PropTypes.number.isRequired,
 }
 
 export default connect(mapStateToProps, { togglePlaying })(BottomPlayer)

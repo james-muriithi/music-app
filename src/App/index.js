@@ -7,12 +7,13 @@ import AddSong from "../components/fab/AddSong"
 import AudioPlayer from "../components/audio/AudioPlayer"
 
 function App() {
-  const [currentTime, setCurrentTime] = useState(0)
+  const [ currentTime, setCurrentTime ] = useState(0)
+  const [ duration, setDuration ] = useState(0)
   return (
     <Layout>
-      <AudioPlayer setCurrentTime={setCurrentTime} />
+      <AudioPlayer setCurrentTime={setCurrentTime} setDuration={setDuration} />
       <SongsList />
-      <BottomPlayer currentTime={currentTime} />
+      <BottomPlayer currentTime={currentTime} duration={duration} />
       <AddSong />
     </Layout>
   )

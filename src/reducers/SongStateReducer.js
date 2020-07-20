@@ -1,4 +1,4 @@
-import { TOGGLE_PLAYING, PLAY_SONG, UPDATE_TIME } from "../actions/types"
+import { TOGGLE_PLAYING, PLAY_SONG } from "../actions/types"
 
 const initalState = {
   playing: false,
