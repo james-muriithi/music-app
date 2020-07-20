@@ -19,16 +19,3 @@ export const removeSong = id => dispatch => {
     id,
   })
 }
-
-export const playSong = id => dispatch => {
-  dispatch({
-    type: PLAY_SONG,
-    id,
-  })
-}
-
-export const togglePlaying = () => dispatch => {
-  dispatch({
-    type: TOGGLE_PLAYING,
-  })
-}

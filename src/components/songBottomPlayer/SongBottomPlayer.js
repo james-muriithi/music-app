@@ -149,7 +149,7 @@ function BottomPlayer(props) {
           >
             <IconButton
               onClick={() => {
-                togglePlaying(playState.songId)
+                togglePlaying()
               }}
             >
               {playState.playing ? (

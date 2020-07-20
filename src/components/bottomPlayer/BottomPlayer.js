@@ -14,7 +14,7 @@ import { connect } from "react-redux"
 import SongHeader from "../songHeader/SongHeader"
 import SongBottomPlayer from "../songBottomPlayer/SongBottomPlayer"
 import SongMetaData from "../songMetadata/SongMetaData"
-import { togglePlaying } from "../../actions/SongStateActions"
+import { togglePlaying, playSong } from "../../actions/SongStateActions"
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -39,7 +39,14 @@ const useStyles = makeStyles(theme => ({
 function BottomPlayer(props) {
   const [open, setOpen] = useState(false)
   const classes = useStyles()
-  const { playState, songs, togglePlaying, currentTime, duration } = props
+  const {
+    playState,
+    songs,
+    togglePlaying,
+    currentTime,
+    duration,
+    playSong,
+  } = props
 
   const toggleDrawer = event => {
     if (
@@ -57,17 +64,14 @@ function BottomPlayer(props) {
     setOpen(prevState => !prevState)
   }
 
-  const progressValue = (currentTime * 100) / duration
+  const progressValue = duration !== 0 ? (currentTime * 100) / duration : 0
 
   return (
     <>
       <Paper className={classes.root}>
         <LinearProgress variant="determinate" value={progressValue} />
         <div className="now-playing-container" style={{ paddingBottom: "5px" }}>
-          <Avatar
-            variant="square"
-            className={classes.square}
-          >
+          <Avatar variant="square" className={classes.square}>
             <MusicNote style={{ fontSize: "35px" }} />
           </Avatar>
           <div
@@ -78,7 +82,7 @@ function BottomPlayer(props) {
               }
             }}
           >
-            <Typography variant="body1" noWrap className={classes.songName}>
+            <Typography variant="body1" noWrap>
               {playState.songId !== -1
                 ? songs[playState.songId].name
                 : "No Song"}
@@ -90,10 +94,14 @@ function BottomPlayer(props) {
           <IconButton
             className={classes.icon}
             onClick={() => {
-              togglePlaying(playState.songId)
+              if (playState.songId !== -1) {
+                togglePlaying()
+              } else {
+                songs[0] && playSong(0)
+              }
             }}
             style={{
-              marginLeft: 'auto'
+              marginLeft: "auto",
             }}
           >
             {playState.playing ? (
@@ -138,8 +146,11 @@ BottomPlayer.propTypes = {
     songId: PropTypes.number.isRequired,
   }).isRequired,
   togglePlaying: PropTypes.func.isRequired,
+  playSong: PropTypes.func.isRequired,
   currentTime: PropTypes.number.isRequired,
   duration: PropTypes.number.isRequired,
 }
 
-export default connect(mapStateToProps, { togglePlaying })(BottomPlayer)
+export default connect(mapStateToProps, { togglePlaying, playSong })(
+  BottomPlayer
+)
