@@ -46,6 +46,8 @@ function BottomPlayer(props) {
     currentTime,
     duration,
     playSong,
+    playNext,
+    playPrevious,
   } = props
 
   const toggleDrawer = event => {
@@ -127,7 +129,12 @@ function BottomPlayer(props) {
         <>
           <SongHeader toggleDrawer={toggleDrawer} />
           <SongMetaData playState={playState} />
-          <SongBottomPlayer currentTime={progressValue} duration={duration} />
+          <SongBottomPlayer
+            currentTime={progressValue}
+            duration={duration}
+            playNext={playNext}
+            playPrevious={playPrevious}
+          />
         </>
       </SwipeableDrawer>
     </>
@@ -147,6 +154,8 @@ BottomPlayer.propTypes = {
   }).isRequired,
   togglePlaying: PropTypes.func.isRequired,
   playSong: PropTypes.func.isRequired,
+  playNext: PropTypes.func.isRequired,
+  playPrevious: PropTypes.func.isRequired,
   currentTime: PropTypes.number.isRequired,
   duration: PropTypes.number.isRequired,
 }

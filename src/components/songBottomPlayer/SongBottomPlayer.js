@@ -45,7 +45,15 @@ const useStyles = makeStyles({
 })
 
 function BottomPlayer(props) {
-  const { currentTime, togglePlaying, songs, playState, duration } = props
+  const {
+    currentTime,
+    togglePlaying,
+    songs,
+    playState,
+    duration,
+    playNext,
+    playPrevious,
+  } = props
 
   const classes = useStyles({ width: "-200%" })
 
@@ -139,7 +147,7 @@ function BottomPlayer(props) {
                             } */}
               <RepeatOne />
             </IconButton>
-            <IconButton>
+            <IconButton onClick={playPrevious}>
               <SkipPrevious />
             </IconButton>
           </div>
@@ -163,7 +171,7 @@ function BottomPlayer(props) {
             style={{ width: "35%", textAlign: "center" }}
             className="side-icons"
           >
-            <IconButton>
+            <IconButton onClick={playNext}>
               <SkipNext />
             </IconButton>
             <ShuffleIcon
@@ -191,6 +199,8 @@ BottomPlayer.propTypes = {
   }).isRequired,
   togglePlaying: PropTypes.func.isRequired,
   duration: PropTypes.number.isRequired,
+  playNext: PropTypes.func.isRequired,
+  playPrevious: PropTypes.func.isRequired,
 }
 
 export default connect(mapStateToProps, { togglePlaying })(BottomPlayer)

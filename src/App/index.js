@@ -23,6 +23,20 @@ function App(props) {
     }
   }
 
+  const playNext = () => {
+    console.log("hey")
+    URL.revokeObjectURL(songs[playState.songId])
+    const nextSongId = (playState.songId + 1) % songs.length
+    playSong(nextSongId)
+  }
+
+  const playPrevious = () => {
+    URL.revokeObjectURL(songs[playState.songId])
+    const prevSongId =
+      playState.songId === 0 ? songs.length - 1 : playState.songId - 1
+    playSong(prevSongId)
+  }
+
   useEffect(() => {
     keyboardEvents({
       togglePlaying: toggle,
@@ -33,7 +47,12 @@ function App(props) {
     <Layout>
       <AudioPlayer setCurrentTime={setCurrentTime} setDuration={setDuration} />
       <SongsList />
-      <BottomPlayer currentTime={currentTime} duration={duration} />
+      <BottomPlayer
+        currentTime={currentTime}
+        duration={duration}
+        playNext={playNext}
+        playPrevious={playPrevious}
+      />
       <AddSong />
     </Layout>
   )
