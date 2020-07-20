@@ -114,7 +114,7 @@ function BottomPlayer(props) {
       <Paper>
         {/* slider */}
         <Grid container spacing={2}>
-          <Grid item style={{ paddingLeft: "10px" }}>
+          <Grid item style={{ paddingLeft: "12px" }}>
             {showCurrentTime()}
           </Grid>
           <Grid item xs>
@@ -131,7 +131,7 @@ function BottomPlayer(props) {
               defaultValue={0}
             />
           </Grid>
-          <Grid item style={{ paddingRight: "10px" }}>
+          <Grid item style={{ paddingRight: "12px" }}>
             {showDuration()}
           </Grid>
         </Grid>

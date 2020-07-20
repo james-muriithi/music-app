@@ -16,32 +16,35 @@ function App(props) {
   const { songId } = playState
 
   const toggle = () => {
-    if (songId !== -1) {
-      togglePlaying()
-    } else {
-      songs[0] && playSong(0)
-    }
+    togglePlaying();
   }
 
   const playNext = () => {
-    console.log("hey")
-    URL.revokeObjectURL(songs[playState.songId])
-    const nextSongId = (playState.songId + 1) % songs.length
+    URL.revokeObjectURL(songs[songId])
+    const nextSongId = (songId + 1) % songs.length
     playSong(nextSongId)
   }
 
   const playPrevious = () => {
-    URL.revokeObjectURL(songs[playState.songId])
+    URL.revokeObjectURL(songs[songId])
     const prevSongId =
-      playState.songId === 0 ? songs.length - 1 : playState.songId - 1
+      songId === 0 ? songs.length - 1 : songId - 1
     playSong(prevSongId)
   }
 
   useEffect(() => {
+    if (playState.playing && playState.songId === -1) {
+      if (songs[0]) {
+        playSong(0);
+      }
+    }
+  }, [playState])
+
+  useEffect(() => {
     keyboardEvents({
       togglePlaying: toggle,
-    })
-  }, [songId])
+    });
+  },[])
 
   return (
     <Layout>

@@ -42,7 +42,7 @@ const addActionListeners = () => {
         state.playState.songId === 0
           ? state.songs.length - 1
           : state.playState.songId - 1
-      store.dispatch(playSong(prevId))
+      playSong(prevId)
     }
   })
 
@@ -50,7 +50,7 @@ const addActionListeners = () => {
     if (store) {
       const state = store.getState()
       const nextId = (state.playState.songId + 1) % state.songs.length
-      store.dispatch(playSong(nextId))
+      playSong(nextId)
     }
   })
 

@@ -1,18 +1,22 @@
-const ACTION_KEYS = ["ARROWLEFT", "ARROWRIGHT", "SPACE"]
+const ACTION_KEYS = [
+  'ARROWLEFT',
+  'ARROWRIGHT',
+  'SPACE',
+];
 
 export default function keyboardEvents(handlers) {
-  const handler = e => {
-    const upperCaseKey = e.code.toUpperCase()
+  const handler = (e) => {
+    const upperCaseKey = e.code.toUpperCase();
 
     if (ACTION_KEYS.indexOf(upperCaseKey) === -1) {
-      return
+      return;
     }
 
     const {
       // playNext,
       // playPrevious,
       togglePlaying,
-    } = handlers
+    } = handlers;
 
     switch (upperCaseKey) {
       // case 'ARROWLEFT':
@@ -21,14 +25,14 @@ export default function keyboardEvents(handlers) {
       // case 'ARROWRIGHT':
       //   playNext();
       //   break;
-      case "SPACE":
-        togglePlaying()
-        break
+      case 'SPACE':
+        togglePlaying();
+        break;
       default:
-        break
+        break;
     }
-  }
+  };
   const globalWindow = typeof window !== "undefined" && window
-  globalWindow.addEventListener("keydown", handler)
-  return () => globalWindow.removeEventListener("keydown", handler)
+  globalWindow.addEventListener('keydown', handler);
+  return () => globalWindow.removeEventListener('keydown', handler);
 }
