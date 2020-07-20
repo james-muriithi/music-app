@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react"
 import { connect } from "react-redux"
 import PropTypes from "prop-types"
-import { togglePlaying } from "../../actions/SongStateActions"
+import { togglePlaying, playSong } from "../../actions/SongStateActions"
 
 function AudioPlayer(props) {
   const {
@@ -48,14 +48,21 @@ function AudioPlayer(props) {
   }, [dragTime])
 
   useEffect(() => {
-    if (playState.songId !== -1 && !songs[ playState.songId ]) {
-      audio_player.current.src = ''
+    if (playState.songId !== -1 && !songs[playState.songId]) {
+      audio_player.current.src = ""
     }
-  }, [ songs ])
+  }, [songs])
 
   const onSongEnded = () => {
-    // for now
-    togglePlaying(playState.songId)
+    const { repeatType, playNext, playSong } = props
+    // repeat
+    if (repeatType === 0) {
+      playNext()
+    } else if (repeatType === 1) {
+      // repeat one
+      playSong(playState.songId)
+      // no repeat
+    } else togglePlaying()
   }
 
   const updateTime = () => {
@@ -81,6 +88,7 @@ function AudioPlayer(props) {
 const mapStateToProps = state => ({
   songs: state.songs,
   playState: state.playState,
+  repeatType: state.settings.repeat,
 })
 
 AudioPlayer.propTypes = {
@@ -90,9 +98,13 @@ AudioPlayer.propTypes = {
     songId: PropTypes.number.isRequired,
   }).isRequired,
   togglePlaying: PropTypes.func.isRequired,
+  playNext: PropTypes.func.isRequired,
   setCurrentTime: PropTypes.func.isRequired,
   setDuration: PropTypes.func.isRequired,
   timeDrag: PropTypes.number,
+  repeatType: PropTypes.oneOf([0, 1, 2]).isRequired,
 }
 
-export default connect(mapStateToProps, { togglePlaying })(AudioPlayer)
+export default connect(mapStateToProps, { togglePlaying, playSong })(
+  AudioPlayer
+)

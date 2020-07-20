@@ -56,6 +56,7 @@ function App(props) {
         setCurrentTime={setCurrentTime}
         setDuration={setDuration}
         dragTime={dragTime}
+        playNext={playNext}
       />
       <SongsList />
       <BottomPlayer

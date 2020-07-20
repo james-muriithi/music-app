@@ -14,7 +14,7 @@ import Slider from "@material-ui/core/Slider"
 import { connect } from "react-redux"
 import Grid from "@material-ui/core/Grid"
 
-import { togglePlaying } from "../../actions/SongStateActions"
+import { togglePlaying, changeRepeat } from "../../actions/SongStateActions"
 
 const useStyles = makeStyles({
   root: {
@@ -54,6 +54,7 @@ function BottomPlayer(props) {
     playNext,
     playPrevious,
     timeDrag,
+    repeatType: repeat,
   } = props
 
   const classes = useStyles()
@@ -75,6 +76,12 @@ function BottomPlayer(props) {
     let minutes = "0" + Math.floor(duration / 60)
     let seconds = "0" + Math.floor(duration % 60)
     return `${minutes.substr(-2)}:${seconds.substr(-2)}`
+  }
+
+  const repeatOnClick = () => {
+    const { changeRepeat } = props
+    const nextRepeat = repeat === 2 ? 0 : repeat + 1
+    changeRepeat(nextRepeat)
   }
 
   useEffect(() => {
@@ -143,11 +150,12 @@ function BottomPlayer(props) {
             style={{ width: "35%", textAlign: "center" }}
             className="side-icons"
           >
-            <IconButton>
-              {/* {repeat === 1
-                                ? <RepeatOne /> : <Repeat style={repeat === 2 ? {} : { opacity: 0.5 }} />
-                            } */}
-              <RepeatOne />
+            <IconButton onClick={repeatOnClick}>
+              {repeat === 1 ? (
+                <RepeatOne />
+              ) : (
+                <Repeat style={repeat === 0 ? {} : { opacity: 0.5 }} />
+              )}
             </IconButton>
             <IconButton onClick={playPrevious}>
               <SkipPrevious />
@@ -190,6 +198,7 @@ function BottomPlayer(props) {
 const mapStateToProps = state => ({
   songs: state.songs,
   playState: state.playState,
+  repeatType: state.settings.repeat,
 })
 
 BottomPlayer.propTypes = {
@@ -204,6 +213,9 @@ BottomPlayer.propTypes = {
   playNext: PropTypes.func.isRequired,
   playPrevious: PropTypes.func.isRequired,
   timeDrag: PropTypes.func.isRequired,
+  repeatType: PropTypes.number.isRequired,
 }
 
-export default connect(mapStateToProps, { togglePlaying })(BottomPlayer)
+export default connect(mapStateToProps, { togglePlaying, changeRepeat })(
+  BottomPlayer
+)

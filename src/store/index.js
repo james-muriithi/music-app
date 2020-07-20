@@ -1,7 +1,7 @@
 import { applyMiddleware, createStore, compose } from "redux"
 import thunk from "redux-thunk"
 import * as LocalForage from "localforage"
-import { ADD_SONGS } from "../actions/types"
+import { ADD_SONGS, REPEAT } from "../actions/types"
 
 import rootReducer from "../reducers"
 
@@ -37,6 +37,12 @@ LocalForage.getItem("mySongs").then(state => {
   if (state !== null && state.songs) {
     store.dispatch({ type: ADD_SONGS, songs: state.songs })
   }
+  if (state && state.settings && state.settings.repeat) {
+    store.dispatch({ type: REPEAT, id: state.settings.repeat })
+  }
+  // if (state && state.playState && state.playState.playing) {
+  //   store.dispatch({ type: REPEAT, id: state.settings.repeat })
+  // }
   return {}
 })
 

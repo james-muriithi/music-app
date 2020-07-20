@@ -1,4 +1,4 @@
-import { TOGGLE_PLAYING, PLAY_SONG } from "./types"
+import { TOGGLE_PLAYING, PLAY_SONG, REPEAT } from "./types"
 import mediaSession from "../utils/media-session"
 
 export const playSong = song_id => dispatch => {
@@ -14,3 +14,8 @@ export const togglePlaying = () => dispatch => {
     type: TOGGLE_PLAYING,
   })
 }
+
+export const changeRepeat = id => ({
+  type: REPEAT,
+  id,
+})
