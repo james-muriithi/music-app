@@ -47,6 +47,12 @@ function AudioPlayer(props) {
     }
   }, [dragTime])
 
+  useEffect(() => {
+    if (playState.songId !== -1 && !songs[ playState.songId ]) {
+      audio_player.current.src = ''
+    }
+  }, [ songs ])
+
   const onSongEnded = () => {
     // for now
     togglePlaying(playState.songId)
