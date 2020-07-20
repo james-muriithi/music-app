@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react"
-import PropTypes from 'prop-types'
+import PropTypes from "prop-types"
 import { makeStyles, Typography } from "@material-ui/core"
 import Paper from "@material-ui/core/Paper"
 import PauseIcon from "@material-ui/icons/Pause"
@@ -11,8 +11,8 @@ import ShuffleIcon from "@material-ui/icons/Shuffle"
 import Repeat from "@material-ui/icons/Repeat"
 import RepeatOne from "@material-ui/icons/RepeatOne"
 import Slider from "@material-ui/core/Slider"
-import { connect } from "react-redux";
-import Grid from '@material-ui/core/Grid';
+import { connect } from "react-redux"
+import Grid from "@material-ui/core/Grid"
 
 import { togglePlaying } from "../../actions/SongStateActions"
 
@@ -45,26 +45,26 @@ const useStyles = makeStyles({
 })
 
 function BottomPlayer(props) {
-  const {currentTime, togglePlaying, songs, playState, duration} = props
+  const { currentTime, togglePlaying, songs, playState, duration } = props
 
-  const classes = useStyles({ width: "-200%"})
+  const classes = useStyles({ width: "-200%" })
 
   const [overflow, setOverflow] = useState(false)
   const songTitle = useRef(null)
   const globalWindow = typeof window !== "undefined" && window
 
-  const showCurrentTime = () =>{
+  const showCurrentTime = () => {
     const value = (currentTime * duration) / 100
-    let minutes = '0' + Math.floor(value / 60);
-    let seconds = '0' + Math.floor(value % 60);
-    minutes = minutes === 'NaN' ? '00' : minutes;
-    seconds = seconds === 'NaN' ? '00' : seconds;
+    let minutes = "0" + Math.floor(value / 60)
+    let seconds = "0" + Math.floor(value % 60)
+    minutes = minutes === "NaN" ? "00" : minutes
+    seconds = seconds === "NaN" ? "00" : seconds
     return `${minutes.substr(-2)}:${seconds.substr(-2)}`
   }
 
   const showDuration = () => {
-    let minutes = '0' + Math.floor(duration / 60);
-    let seconds = '0' + Math.floor(duration % 60);
+    let minutes = "0" + Math.floor(duration / 60)
+    let seconds = "0" + Math.floor(duration % 60)
     return `${minutes.substr(-2)}:${seconds.substr(-2)}`
   }
 
@@ -92,9 +92,7 @@ function BottomPlayer(props) {
           className={overflow ? "marquee" : ""}
           style={{ textAlign: "center", whiteSpace: "nowrap" }}
         >
-          {playState.songId !== -1
-            ? songs[ playState.songId ].name
-            : "No Song"}
+          {playState.songId !== -1 ? songs[playState.songId].name : "No Song"}
         </Typography>
         <Typography
           variant="caption"
@@ -105,11 +103,10 @@ function BottomPlayer(props) {
         </Typography>
       </div>
 
-
       <Paper>
         {/* slider */}
         <Grid container spacing={2}>
-          <Grid item style={{paddingLeft:'10px'}}>
+          <Grid item style={{ paddingLeft: "10px" }}>
             {showCurrentTime()}
           </Grid>
           <Grid item xs>
@@ -118,19 +115,19 @@ function BottomPlayer(props) {
               className={classes.slider}
               valueLabelFormat={value => {
                 value = (value * duration) / 100
-                let minutes = '0' + Math.floor(value / 60);
-                let seconds = '0' + Math.floor(value % 60);
+                let minutes = "0" + Math.floor(value / 60)
+                let seconds = "0" + Math.floor(value % 60)
                 return `${minutes.substr(-2)}:${seconds.substr(-2)}`
               }}
               value={currentTime}
               defaultValue={0}
             />
           </Grid>
-          <Grid item style={{ paddingRight: '10px' }}>
+          <Grid item style={{ paddingRight: "10px" }}>
             {showDuration()}
           </Grid>
         </Grid>
-        
+
         <div style={{ display: "flex" }}>
           <div
             style={{ width: "35%", textAlign: "center" }}
@@ -150,11 +147,16 @@ function BottomPlayer(props) {
             style={{ width: "30%", textAlign: "center" }}
             className="play-pause-button"
           >
-            <IconButton onClick={()=>{
-              togglePlaying(playState.songId)
-            }}>
-              {playState.playing ? <PauseIcon color="primary" className={classes.icon} /> : <PlayIcon color="primary" className={classes.icon} />}
-              
+            <IconButton
+              onClick={() => {
+                togglePlaying(playState.songId)
+              }}
+            >
+              {playState.playing ? (
+                <PauseIcon color="primary" className={classes.icon} />
+              ) : (
+                <PlayIcon color="primary" className={classes.icon} />
+              )}
             </IconButton>
           </div>
           <div
@@ -185,7 +187,7 @@ BottomPlayer.propTypes = {
   songs: PropTypes.array.isRequired,
   playState: PropTypes.shape({
     playing: PropTypes.bool.isRequired,
-    songId: PropTypes.number.isRequired
+    songId: PropTypes.number.isRequired,
   }).isRequired,
   togglePlaying: PropTypes.func.isRequired,
   duration: PropTypes.number.isRequired,

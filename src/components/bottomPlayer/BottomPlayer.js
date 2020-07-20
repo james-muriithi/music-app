@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
     bottom: "0px",
     left: "0px",
     width: "100%",
-    height: "80px",
+    minHeight: "80px",
   },
   icon: {
     fontSize: "40px",
@@ -63,8 +63,11 @@ function BottomPlayer(props) {
     <>
       <Paper className={classes.root}>
         <LinearProgress variant="determinate" value={progressValue} />
-        <div className="now-playing-container">
-          <Avatar variant="square" className={classes.square}>
+        <div className="now-playing-container" style={{ paddingBottom: "5px" }}>
+          <Avatar
+            variant="square"
+            className={classes.square}
+          >
             <MusicNote style={{ fontSize: "35px" }} />
           </Avatar>
           <div
@@ -75,7 +78,7 @@ function BottomPlayer(props) {
               }
             }}
           >
-            <Typography variant="body1">
+            <Typography variant="body1" noWrap className={classes.songName}>
               {playState.songId !== -1
                 ? songs[playState.songId].name
                 : "No Song"}
@@ -88,6 +91,9 @@ function BottomPlayer(props) {
             className={classes.icon}
             onClick={() => {
               togglePlaying(playState.songId)
+            }}
+            style={{
+              marginLeft: 'auto'
             }}
           >
             {playState.playing ? (
@@ -113,7 +119,7 @@ function BottomPlayer(props) {
         <>
           <SongHeader toggleDrawer={toggleDrawer} />
           <SongMetaData playState={playState} />
-          <SongBottomPlayer currentTime={progressValue} duration = {duration}  />
+          <SongBottomPlayer currentTime={progressValue} duration={duration} />
         </>
       </SwipeableDrawer>
     </>
@@ -128,8 +134,8 @@ const mapStateToProps = state => ({
 BottomPlayer.propTypes = {
   songs: PropTypes.array.isRequired,
   playState: PropTypes.shape({
-    playing : PropTypes.bool.isRequired,
-    songId: PropTypes.number.isRequired
+    playing: PropTypes.bool.isRequired,
+    songId: PropTypes.number.isRequired,
   }).isRequired,
   togglePlaying: PropTypes.func.isRequired,
   currentTime: PropTypes.number.isRequired,

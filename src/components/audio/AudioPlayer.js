@@ -25,7 +25,7 @@ function AudioPlayer(props) {
         prevState.playState.songId !== playState.songId
       ) {
         audio_player.current.src = URL.createObjectURL(songs[playState.songId])
-        audio_player.current.play();
+        audio_player.current.play()
       } else {
         audio_player.current.play()
       }
@@ -40,7 +40,7 @@ function AudioPlayer(props) {
   }
 
   const updateTime = () => {
-      setCurrentTime(audio_player.current.currentTime);
+    setCurrentTime(audio_player.current.currentTime)
   }
 
   return (
@@ -50,8 +50,8 @@ function AudioPlayer(props) {
       onEnded={onSongEnded}
       onTimeUpdate={updateTime}
       ref={audio_player}
-      onLoadedMetadata={()=>{
-        setDuration(audio_player.current.duration);
+      onLoadedMetadata={() => {
+        setDuration(audio_player.current.duration)
       }}
     >
       <track kind="captions" {...{}} />

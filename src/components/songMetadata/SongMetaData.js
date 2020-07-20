@@ -1,6 +1,6 @@
 import React from "react"
-import { makeStyles } from "@material-ui/core";
-import PropTypes from "prop-types";
+import { makeStyles } from "@material-ui/core"
+import PropTypes from "prop-types"
 
 // import MusicNote from '@material-ui/icons/MusicNote';
 // import Avatar from '@material-ui/core/Avatar';
@@ -48,7 +48,7 @@ const useStyles = makeStyles(theme => ({
 }))
 function SongMetaData(props) {
   const classes = useStyles()
-  const {playState} = props
+  const { playState } = props
 
   return (
     <div className={classes.root}>
@@ -69,8 +69,8 @@ function SongMetaData(props) {
 SongMetaData.propTypes = {
   playState: PropTypes.shape({
     playing: PropTypes.bool.isRequired,
-    songId: PropTypes.number
-  }).isRequired
+    songId: PropTypes.number,
+  }).isRequired,
 }
 
-export default SongMetaData;
+export default SongMetaData

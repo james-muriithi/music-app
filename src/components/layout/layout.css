@@ -72,9 +72,10 @@ body {
 .now-playing-container .song-name {
     padding: 0px 5px;
     padding-left: 10px;
-    flex: 1;
     color: #333333;
     line-height: 1.7rem;
+    width: auto;
+    overflow: hidden;
 }
 
 .now-playing-container button {
