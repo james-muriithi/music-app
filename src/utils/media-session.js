@@ -1,11 +1,13 @@
-import { playSong } from "../actions/SongActions"
-import { togglePlaying } from "../actions/SongActions"
+import { togglePlaying, playSong } from "../actions/SongStateActions"
 
 let store
-const mediaSessionEnabled = "mediaSession" in navigator
+const globalNavigator = typeof navigator !== "undefined" && navigator
+const mediaSessionEnabled = globalNavigator
+  ? "mediaSession" in globalNavigator
+  : false
 const addNewSong = id => {
   const state = store.getState()
-  navigator.mediaSession.metadata = new window.MediaMetadata({
+  globalNavigator.mediaSession.metadata = new window.MediaMetadata({
     title: state.songs[id].name,
     artist: "Unknown",
     album: "Unknown Albumn",
@@ -35,7 +37,7 @@ const addNewSong = id => {
 }
 
 const addActionListeners = () => {
-  navigator.mediaSession.setActionHandler("previoustrack", () => {
+  globalNavigator.mediaSession.setActionHandler("previoustrack", () => {
     if (store) {
       const state = store.getState()
       const prevId =
@@ -46,7 +48,7 @@ const addActionListeners = () => {
     }
   })
 
-  navigator.mediaSession.setActionHandler("nexttrack", () => {
+  globalNavigator.mediaSession.setActionHandler("nexttrack", () => {
     if (store) {
       const state = store.getState()
       const nextId = (state.playState.songId + 1) % state.songs.length
@@ -54,11 +56,11 @@ const addActionListeners = () => {
     }
   })
 
-  navigator.mediaSession.setActionHandler("play", () => {
+  globalNavigator.mediaSession.setActionHandler("play", () => {
     if (store) togglePlaying()
   })
 
-  navigator.mediaSession.setActionHandler("pause", () => {
+  globalNavigator.mediaSession.setActionHandler("pause", () => {
     if (store) togglePlaying()
   })
 }
