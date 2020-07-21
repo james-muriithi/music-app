@@ -150,14 +150,14 @@ function BottomPlayer(props) {
             style={{ width: "35%", textAlign: "center" }}
             className="side-icons"
           >
-            <IconButton onClick={repeatOnClick}>
+            <IconButton onClick={repeatOnClick} aria-label="change repeat">
               {repeat === 1 ? (
                 <RepeatOne />
               ) : (
                 <Repeat style={repeat === 0 ? {} : { opacity: 0.5 }} />
               )}
             </IconButton>
-            <IconButton onClick={playPrevious}>
+            <IconButton onClick={playPrevious} aria-label="play previous song">
               <SkipPrevious />
             </IconButton>
           </div>
@@ -166,6 +166,7 @@ function BottomPlayer(props) {
             className="play-pause-button"
           >
             <IconButton
+              aria-label="play or pause button"
               onClick={() => {
                 togglePlaying()
               }}
@@ -181,7 +182,7 @@ function BottomPlayer(props) {
             style={{ width: "35%", textAlign: "center" }}
             className="side-icons"
           >
-            <IconButton onClick={playNext}>
+            <IconButton onClick={playNext} aria-label="play next song">
               <SkipNext />
             </IconButton>
             <ShuffleIcon

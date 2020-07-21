@@ -43,6 +43,7 @@ function BottomPlayer(props) {
       <Paper className={classes.root} elevation={0}>
         <div className={classes.paperTop}>
           <IconButton
+            aria-label="close song modal"
             onClick={props.toggleDrawer}
             className={classes.noPadding}
           >
@@ -51,7 +52,7 @@ function BottomPlayer(props) {
           <Typography variant="h6" className={classes.title}>
             Now Playing
           </Typography>
-          <IconButton className={classes.noPadding}>
+          <IconButton className={classes.noPadding} aria-label="more info">
             <MoreVert style={{ fontSize: "25px" }} />
           </IconButton>
         </div>

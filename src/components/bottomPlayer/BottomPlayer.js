@@ -90,7 +90,7 @@ function BottomPlayer(props) {
                 ? songs[playState.songId].name
                 : "No Song"}
             </Typography>
-            <Typography variant="caption" style={{ color: "#b2b2b2" }}>
+            <Typography variant="caption" style={{ color: "#8c8c8c" }}>
               Unknown artist
             </Typography>
           </div>
@@ -106,6 +106,7 @@ function BottomPlayer(props) {
             style={{
               marginLeft: "auto",
             }}
+            aria-label="play or pause button"
           >
             {playState.playing ? (
               <PauseIcon className={classes.icon} />
