@@ -10,9 +10,9 @@ const useStyles = makeStyles(theme => ({
   root: {
     paddingBottom: theme.spacing(11),
     paddingTop: theme.spacing(9),
-    [theme.breakpoints.down('md')]:{
-      paddingTop: theme.spacing(7)
-    }
+    [theme.breakpoints.down("md")]: {
+      paddingTop: theme.spacing(7),
+    },
   },
 }))
 
@@ -25,7 +25,7 @@ function SongsList(props) {
       <div className={classes.root}>
         <h4 style={{ fontWeight: 300, textAlign: "center" }}>
           No Songs Present. Please Add Some Songs
-      </h4>
+        </h4>
       </div>
     )
   }
