@@ -14,6 +14,7 @@
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 
 ## Screenshots
+
 <p align="center">
 <img src="./screenshots/screenshot1.webp" width="32%"/>
 <img src="./screenshots/screenshot2.webp" width="32%"/>
@@ -26,6 +27,7 @@
 </p>
 
 ## Quick start
+
 > How to install
 
 ```
@@ -35,7 +37,6 @@ $ npm start
 ```
 
 > Then in your browser go to [http://localhost:8000/](http://localhost:8000/)
-
 
 # Licence
 

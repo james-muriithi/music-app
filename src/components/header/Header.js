@@ -17,7 +17,7 @@ import HomeIcon from "@material-ui/icons/Home"
 import SettingsIcon from "@material-ui/icons/Settings"
 import MenuIcon from "@material-ui/icons/Menu"
 
-import Logo from "../logo";
+import Logo from "../logo"
 
 const useStyles = makeStyles(theme => ({
   root: {

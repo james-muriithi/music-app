@@ -1,17 +1,16 @@
 import React from "react"
 import PropTypes from "prop-types"
 import List from "@material-ui/core/List"
-import {makeStyles} from "@material-ui/core/styles"
+import { makeStyles } from "@material-ui/core/styles"
 import { connect } from "react-redux"
 
-import Song from "../song/Song";
+import Song from "../song/Song"
 
 const useStyles = makeStyles(theme => ({
   root: {
-    paddingBottom: theme.spacing(11)
-  }
-}));
-
+    paddingBottom: theme.spacing(11),
+  },
+}))
 
 function SongsList(props) {
   const { songs } = props

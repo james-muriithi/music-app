@@ -1,4 +1,4 @@
-import { TOGGLE_PLAYING,PLAY_SONG } from "../actions/types";
+import { TOGGLE_PLAYING, PLAY_SONG } from "../actions/types"
 
 let store
 const globalNavigator = typeof navigator !== "undefined" && navigator
@@ -7,10 +7,10 @@ const mediaSessionEnabled = globalNavigator
   : false
 const addNewSong = id => {
   const state = store.getState()
-  const title = state.songs[ id ].name
+  const title = state.songs[id].name
   let artist = "Unknown"
-  if(title.indexOf(' - ') !== -1){
-    artist = title.split(' - ')[0];
+  if (title.indexOf(" - ") !== -1) {
+    artist = title.split(" - ")[0]
   }
   globalNavigator.mediaSession.metadata = new window.MediaMetadata({
     title,
@@ -51,10 +51,10 @@ const addActionListeners = () => {
           : state.playState.songId - 1
       store.dispatch({
         type: PLAY_SONG,
-        song_id: prevId
+        song_id: prevId,
       })
       if (mediaSessionEnabled) {
-        addNewSong(prevId);
+        addNewSong(prevId)
       }
     }
   })
@@ -65,20 +65,20 @@ const addActionListeners = () => {
       const nextId = (state.playState.songId + 1) % state.songs.length
       store.dispatch({
         type: PLAY_SONG,
-        song_id: nextId
+        song_id: nextId,
       })
       if (mediaSessionEnabled) {
-        addNewSong(nextId);
+        addNewSong(nextId)
       }
     }
   })
 
   globalNavigator.mediaSession.setActionHandler("play", () => {
-    if (store) store.dispatch({ type: TOGGLE_PLAYING });
+    if (store) store.dispatch({ type: TOGGLE_PLAYING })
   })
 
   globalNavigator.mediaSession.setActionHandler("pause", () => {
-    if (store) store.dispatch({type: TOGGLE_PLAYING});
+    if (store) store.dispatch({ type: TOGGLE_PLAYING })
   })
 }
 if (mediaSessionEnabled) addActionListeners()

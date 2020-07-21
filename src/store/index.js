@@ -22,10 +22,10 @@ const store = createStore(
   rootReducer,
   initialState,
   compose(
-    applyMiddleware(...middleware),
-    globalWindow &&
-      globalWindow.__REDUX_DEVTOOLS_EXTENSION__ &&
-      globalWindow.__REDUX_DEVTOOLS_EXTENSION__()
+    applyMiddleware(...middleware)
+    // globalWindow &&
+    //   globalWindow.__REDUX_DEVTOOLS_EXTENSION__ &&
+    //   globalWindow.__REDUX_DEVTOOLS_EXTENSION__()
   )
 )
 

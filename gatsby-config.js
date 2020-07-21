@@ -1,9 +1,9 @@
 module.exports = {
   siteMetadata: {
-    title: `Music App - Listen to your favourite local music`,
-    description: `A simple reactjs, gatsby project to listen to local music.`,
+    title: `Music App - Listen to your favourite music`,
+    description: `A simple music player for local audio files built with gatsbyjs, redux, react for education purposes.`,
     author: `@james-muriithi`,
-    siteUrl: "https://my-online-shop.netlify.app/",
+    siteUrl: "https://music-app123.firebaseapp.com/",
     siteLanguage: `en`,
     ogLanguage: `en`,
     headline: `Music App`,

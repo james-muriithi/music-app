@@ -181,8 +181,8 @@ const SEO = ({ title, desc, banner, pathname, article, node }) => {
 }
 
 SEO.defaultProps = {
-  title: `Music App - Listen to your favourite local music`,
-  desc: `A simple reactjs, gatsby project to listen to local music.`,
+  title: `Music App - Listen to your favourite music`,
+  desc: `A simple music player for local audio files built with gatsbyjs, redux, react for education purposes.`,
   banner: `/preview.png`,
   pathname: null,
   article: false,
