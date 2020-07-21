@@ -7,7 +7,7 @@ import rootReducer from "../reducers"
 
 let initialState = {}
 const middleware = [thunk]
-const globalWindow = typeof window !== "undefined" && window
+// const globalWindow = typeof window !== "undefined" && window
 
 export const getInitialState = () => {
   return LocalForage.getItem("mySongs").then(state => {

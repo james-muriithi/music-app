@@ -25,6 +25,19 @@ const useStyles = makeStyles(theme => ({
     left: "0px",
     width: "100%",
     minHeight: "80px",
+    "& .now-playing-container": {
+      display: "flex",
+      padding: "10px 15px",
+      paddingBottom: "5px",
+      "& .song-name": {
+        padding: "0px 5px",
+        paddingLeft: "10px",
+        color: "#333333",
+        lineHeight: "1.7rem",
+        width: "100%",
+        overflow: "hidden",
+      },
+    },
   },
   icon: {
     fontSize: "40px",
@@ -73,7 +86,7 @@ function BottomPlayer(props) {
     <>
       <Paper className={classes.root}>
         <LinearProgress variant="determinate" value={progressValue} />
-        <div className="now-playing-container" style={{ paddingBottom: "5px" }}>
+        <div className="now-playing-container">
           <Avatar variant="square" className={classes.square}>
             <MusicNote style={{ fontSize: "35px" }} />
           </Avatar>

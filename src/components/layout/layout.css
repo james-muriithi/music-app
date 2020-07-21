@@ -14,46 +14,6 @@ body {
     font-family: sans-serif;
 }
 
-.sr-only {
-    display: none !important;
-}
-
-.small-now-playing .song-title {
-    width: Calc( 85% - 60px);
-    padding: 10px;
-}
-
-.small-now-playing .play-pause-button {
-    display: flex;
-    float: left;
-    width: 60px;
-}
-
-.play-control {
-    position: fixed;
-    bottom: 0px;
-    left: 0px;
-    width: 100%;
-    padding-bottom: 10px;
-    height: 130px;
-}
-
-.song-title {
-    padding: 0px 12px;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-}
-
-.play-control .song-title {
-    padding: 0px 12px;
-    font-weight: 400;
-    text-align: center;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-}
-
 .material-icons {
     width: 30px;
 }
@@ -62,20 +22,6 @@ body {
     display: flex;
     justify-content: space-around;
     align-items: center;
-}
-
-.now-playing-container {
-    display: flex;
-    padding: 10px 15px;
-}
-
-.now-playing-container .song-name {
-    padding: 0px 5px;
-    padding-left: 10px;
-    color: #333333;
-    line-height: 1.7rem;
-    width: 100%;
-    overflow: hidden;
 }
 
 .now-playing-container button {
