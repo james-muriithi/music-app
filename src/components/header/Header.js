@@ -17,6 +17,8 @@ import HomeIcon from "@material-ui/icons/Home"
 import SettingsIcon from "@material-ui/icons/Settings"
 import MenuIcon from "@material-ui/icons/Menu"
 
+import Logo from "../logo";
+
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
@@ -107,7 +109,7 @@ export default function Header() {
             alignItems: "center",
           }}
         >
-          <img src={require("../../images/music-player.png")} alt="Logo" />
+          <Logo />
         </div>
         <Divider />
         {menuOptions.map(option => (

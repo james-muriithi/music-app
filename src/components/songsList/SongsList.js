@@ -1,12 +1,21 @@
 import React from "react"
 import PropTypes from "prop-types"
 import List from "@material-ui/core/List"
+import {makeStyles} from "@material-ui/core/styles"
 import { connect } from "react-redux"
 
-import Song from "../song/Song"
+import Song from "../song/Song";
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    paddingBottom: theme.spacing(11)
+  }
+}));
+
 
 function SongsList(props) {
   const { songs } = props
+  const classes = useStyles()
 
   if (!songs.length) {
     return (
@@ -17,7 +26,7 @@ function SongsList(props) {
   }
 
   return (
-    <List>
+    <List className={classes.root}>
       {songs.length &&
         songs.map((song, index) => (
           <Song song={song} song_id={index} key={index} />
