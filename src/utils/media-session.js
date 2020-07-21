@@ -18,22 +18,27 @@ const addNewSong = id => {
     album: "Unknown Albumn",
     artwork: [
       {
-        src: require("../images/favicon.png"),
+        src: require("../images/icons/icon-96x96.png"),
         sizes: "96x96",
         type: "image/png",
       },
       {
-        src: require("../images/favicon.png"),
+        src: require("../images/icons/icon-144x144.png"),
         sizes: "144x144",
         type: "image/png",
       },
       {
-        src: require("../images/favicon.png"),
+        src: require("../images/icons/icon-192x192.png"),
         sizes: "192x192",
         type: "image/png",
       },
       {
-        src: require("../images/favicon.png"),
+        src: require("../images/icons/icon-256x256.png"),
+        sizes: "256x256",
+        type: "image/png",
+      },
+      {
+        src: require("../images/icons/icon-512x512.png"),
         sizes: "512x512",
         type: "image/png",
       },
