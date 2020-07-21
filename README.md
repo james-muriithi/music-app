@@ -15,14 +15,14 @@
 
 ## Screenshots
 <p align="center">
-<img src="./screenshots/screenshot1.jpg" width="32%"/>
-<img src="./screenshots/screenshot2.jpg" width="32%"/>
-<img src="./screenshots/screenshot3.jpg" width="32%"/>
+<img src="./screenshots/screenshot1.webp" width="32%"/>
+<img src="./screenshots/screenshot2.webp" width="32%"/>
+<img src="./screenshots/screenshot3.webp" width="32%"/>
 </p>
 
 <p align="center">
-<img src="./screenshots/screenshot4.png" width="48%"/>
-<img src="./screenshots/screenshot5.png" width="48%"/>
+<img src="./screenshots/screenshot4.webp" width="48%"/>
+<img src="./screenshots/screenshot5.webp" width="48%"/>
 </p>
 
 ## Quick start
