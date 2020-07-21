@@ -23,9 +23,9 @@ const store = createStore(
   initialState,
   compose(
     applyMiddleware(...middleware),
-    // globalWindow &&
-    //   globalWindow.__REDUX_DEVTOOLS_EXTENSION__ &&
-    //   globalWindow.__REDUX_DEVTOOLS_EXTENSION__()
+    globalWindow &&
+      globalWindow.__REDUX_DEVTOOLS_EXTENSION__ &&
+      globalWindow.__REDUX_DEVTOOLS_EXTENSION__()
   )
 )
 

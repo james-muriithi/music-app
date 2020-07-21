@@ -107,7 +107,7 @@ export default function Header() {
             alignItems: "center",
           }}
         >
-          <img src={require("../../images/favicon.png")} alt="Logo" />
+          <img src={require("../../images/music-player.png")} alt="Logo" />
         </div>
         <Divider />
         {menuOptions.map(option => (
