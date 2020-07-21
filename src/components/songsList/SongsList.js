@@ -9,6 +9,10 @@ import Song from "../song/Song"
 const useStyles = makeStyles(theme => ({
   root: {
     paddingBottom: theme.spacing(11),
+    paddingTop: theme.spacing(9),
+    [theme.breakpoints.down('md')]:{
+      paddingTop: theme.spacing(7)
+    }
   },
 }))
 
@@ -18,9 +22,11 @@ function SongsList(props) {
 
   if (!songs.length) {
     return (
-      <h4 style={{ fontWeight: 300, textAlign: "center" }}>
-        No Songs Present. Please Add Some Songs
+      <div className={classes.root}>
+        <h4 style={{ fontWeight: 300, textAlign: "center" }}>
+          No Songs Present. Please Add Some Songs
       </h4>
+      </div>
     )
   }
 
