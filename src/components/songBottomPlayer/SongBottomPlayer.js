@@ -15,7 +15,8 @@ import { connect } from "react-redux"
 import Grid from "@material-ui/core/Grid"
 
 import { togglePlaying, changeRepeat } from "../../actions/SongStateActions"
-import { shuffle as toggleShuffle } from "../../actions/SongActions";
+import { shuffle as toggleShuffle } from "../../actions/SongActions"
+import HeartIcon from "@material-ui/icons/FavoriteSharp"
 
 const useStyles = makeStyles({
   root: {
@@ -42,6 +43,9 @@ const useStyles = makeStyles({
   slider: {
     paddingTop: "6px",
     paddingBottom: "6px",
+  },
+  likeIcon: {
+    fontSize: "27px",
   },
 })
 
@@ -112,13 +116,23 @@ function BottomPlayer(props) {
         >
           {playState.songId !== -1 ? songs[playState.songId].name : "No Song"}
         </Typography>
-        <Typography
-          variant="caption"
-          component="p"
-          style={{ color: "#b2b2b2", textAlign: "center", paddingTop: "4px" }}
-        >
-          Unknown artist
-        </Typography>
+        <div style={{ textAlign: "center" }}>
+          <Typography
+            variant="caption"
+            component="p"
+            style={{
+              color: "#b2b2b2",
+              textAlign: "center",
+              padding: "4px",
+              display: "inline-block",
+            }}
+          >
+            Unknown artist
+          </Typography>
+          <IconButton style={{ float: "right" }}>
+            <HeartIcon className={classes.likeIcon} />
+          </IconButton>
+        </div>
       </div>
 
       <Paper>
@@ -204,7 +218,7 @@ const mapStateToProps = state => ({
   songs: state.songs,
   playState: state.playState,
   repeatType: state.settings.repeat,
-  shuffle: state.settings.shuffle
+  shuffle: state.settings.shuffle,
 })
 
 BottomPlayer.propTypes = {
@@ -224,6 +238,8 @@ BottomPlayer.propTypes = {
   shuffle: PropTypes.bool.isRequired,
 }
 
-export default connect(mapStateToProps, { togglePlaying, changeRepeat, toggleShuffle })(
-  BottomPlayer
-)
+export default connect(mapStateToProps, {
+  togglePlaying,
+  changeRepeat,
+  toggleShuffle,
+})(BottomPlayer)

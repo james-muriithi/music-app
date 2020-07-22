@@ -2,7 +2,7 @@ import { REPEAT, SHUFFLE, SET_SHUFFLE } from "../actions/types"
 
 const initialState = {
   repeat: 0,
-  shuffle: false
+  shuffle: false,
 }
 
 const SettingsReducer = (state = initialState, action) => {
@@ -11,7 +11,7 @@ const SettingsReducer = (state = initialState, action) => {
       return { ...state, repeat: action.id }
     }
 
-    case SHUFFLE:{
+    case SHUFFLE: {
       return { ...state, shuffle: !state.shuffle }
     }
 

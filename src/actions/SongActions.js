@@ -22,13 +22,13 @@ export const removeSong = id => dispatch => {
 
 export const shuffle = () => dispatch => {
   dispatch({
-    type: SHUFFLE
+    type: SHUFFLE,
   })
 }
 
-export const setShuffle = (shuffle) => dispatch => {
+export const setShuffle = shuffle => dispatch => {
   dispatch({
     type: SHUFFLE,
-    shuffle
+    shuffle,
   })
 }

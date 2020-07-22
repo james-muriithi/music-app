@@ -11,7 +11,7 @@ import ListItemText from "@material-ui/core/ListItemText"
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer"
 import Divider from "@material-ui/core/Divider"
 
-import NowPlayingIcon from "@material-ui/icons/PlaylistPlay"
+import HeartIcon from "@material-ui/icons/FavoriteSharp"
 import PlayListIcon from "@material-ui/icons/List"
 import HomeIcon from "@material-ui/icons/Home"
 import SettingsIcon from "@material-ui/icons/Settings"
@@ -48,9 +48,9 @@ export default function Header() {
       icon: <HomeIcon />,
     },
     {
-      option: "NowPlaying",
+      option: "Favourites",
       page: "NOW_PLAYING_PAGE",
-      icon: <NowPlayingIcon />,
+      icon: <HeartIcon />,
     },
     {
       option: "Playlists",

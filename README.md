@@ -13,7 +13,7 @@
 [![Build Status](https://travis-ci.org/james-muriithi/music-app.svg?branch=master)](https://travis-ci.org/james-muriithi/music-app)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 
- [CHECK OUT THE DEMO](https://music-app123.firebaseapp.com/)
+[CHECK OUT THE DEMO](https://music-app123.firebaseapp.com/)
 
 ## Screenshots
 
@@ -41,15 +41,17 @@ $ npm start
 > Then in your browser go to [http://localhost:8000/](http://localhost:8000/)
 
 ### TECH STACK
+
 - Gatsby
 - Redux
 - React
 
 ## Features
+
 1. Play/Pause
 1. Repeat Options
 1. Progress Bar
-1. Keyborad Controls 
+1. Keyborad Controls
 
 ## TODO LIST
 
@@ -62,6 +64,7 @@ $ npm start
 1. Let playing song show as playing ✅
 1. Show Time ✅
 1. Shuffle ✅
+1. Favourite Songs
 1. Deploy to Firebase with travis-ci
 1. Search
 1. Playlists
