@@ -15,7 +15,10 @@ import { connect } from "react-redux"
 import Grid from "@material-ui/core/Grid"
 
 import { togglePlaying, changeRepeat } from "../../actions/SongStateActions"
-import { shuffle as toggleShuffle, toggleFavorite } from "../../actions/SongActions"
+import {
+  shuffle as toggleShuffle,
+  toggleFavorite,
+} from "../../actions/SongActions"
 import HeartIcon from "@material-ui/icons/FavoriteSharp"
 
 const useStyles = makeStyles(theme => ({
@@ -46,9 +49,9 @@ const useStyles = makeStyles(theme => ({
   },
   likeIcon: {
     fontSize: "27px",
-    '&.favorite': {
-      fill: theme.palette.secondary.main
-    }
+    "&.favorite": {
+      fill: theme.palette.secondary.main,
+    },
   },
 }))
 
@@ -64,7 +67,7 @@ function BottomPlayer(props) {
     timeDrag,
     shuffle,
     repeatType: repeat,
-    toggleFavorite
+    toggleFavorite,
   } = props
 
   const classes = useStyles()
@@ -95,11 +98,11 @@ function BottomPlayer(props) {
   }
 
   const isFavorite = () => {
-    const {favorites} = props
+    const { favorites } = props
     if (favorites.indexOf(playState.songId) !== -1) {
-      return true;
+      return true
     }
-    return false;
+    return false
   }
 
   useEffect(() => {
@@ -141,10 +144,17 @@ function BottomPlayer(props) {
           >
             Unknown artist
           </Typography>
-          <IconButton style={{ float: "right" }} onClick={() => {
-            toggleFavorite(playState.songId);
-          }}>
-            <HeartIcon className={`${classes.likeIcon} ${isFavorite() ? 'favorite': ''}`} />
+          <IconButton
+            style={{ float: "right" }}
+            onClick={() => {
+              toggleFavorite(playState.songId)
+            }}
+          >
+            <HeartIcon
+              className={`${classes.likeIcon} ${
+                isFavorite() ? "favorite" : ""
+              }`}
+            />
           </IconButton>
         </div>
       </div>
@@ -233,7 +243,7 @@ const mapStateToProps = state => ({
   playState: state.playState,
   repeatType: state.settings.repeat,
   shuffle: state.settings.shuffle,
-  favorites: state.favorites
+  favorites: state.favorites,
 })
 
 BottomPlayer.propTypes = {
@@ -252,12 +262,12 @@ BottomPlayer.propTypes = {
   timeDrag: PropTypes.func.isRequired,
   repeatType: PropTypes.number.isRequired,
   shuffle: PropTypes.bool.isRequired,
-  favorites: PropTypes.array.isRequired
+  favorites: PropTypes.array.isRequired,
 }
 
 export default connect(mapStateToProps, {
   togglePlaying,
   changeRepeat,
   toggleShuffle,
-  toggleFavorite
+  toggleFavorite,
 })(BottomPlayer)
