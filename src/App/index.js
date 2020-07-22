@@ -7,12 +7,13 @@ import AddSong from "../components/fab/AddSong"
 import AudioPlayer from "../components/audio/AudioPlayer"
 import keyboardEvents from "../utils/keyboardEvents"
 import { togglePlaying, playSong } from "../actions/SongStateActions"
+import _ from "lodash";
 
 function App(props) {
   const [currentTime, setCurrentTime] = useState(0)
   const [duration, setDuration] = useState(0)
   const [dragTime, setDragTime] = useState(0)
-  const { togglePlaying, playState, songs, playSong } = props
+  const { togglePlaying, playState, songs, playSong, shuffle } = props
 
   const { songId } = playState
 
@@ -22,14 +23,30 @@ function App(props) {
 
   const playNext = () => {
     URL.revokeObjectURL(songs[songId])
-    const nextSongId = (songId + 1) % songs.length
+    let nextSongId = (songId + 1) % songs.length
+    if (shuffle) {
+      nextSongId = shuffleSongs()
+    }
     playSong(nextSongId)
   }
 
   const playPrevious = () => {
     URL.revokeObjectURL(songs[songId])
-    const prevSongId = songId === 0 ? songs.length - 1 : songId - 1
+    let prevSongId = songId === 0 ? songs.length - 1 : songId - 1
+    if (shuffle) {
+      prevSongId = shuffleSongs()
+    }
     playSong(prevSongId)
+  }
+
+  const shuffleSongs = (exceptSongId = null) => {
+    const mySongs = []
+    songs.map((_,index) => {
+      if (index !== exceptSongId ) {
+        mySongs.push(index)
+      }
+    })
+    return _.sample(mySongs);
   }
 
   const timeDrag = time => {
@@ -39,7 +56,7 @@ function App(props) {
   useEffect(() => {
     if (playState.playing && playState.songId === -1) {
       if (songs[0]) {
-        playSong(0)
+          playSong(0)
       }
     }
   }, [playState])
@@ -74,6 +91,7 @@ function App(props) {
 const mapStateToProps = state => ({
   playState: state.playState,
   songs: state.songs,
+  shuffle: state.settings.shuffle
 })
 
 export default connect(mapStateToProps, { togglePlaying, playSong })(App)

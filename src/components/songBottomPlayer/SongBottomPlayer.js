@@ -15,6 +15,7 @@ import { connect } from "react-redux"
 import Grid from "@material-ui/core/Grid"
 
 import { togglePlaying, changeRepeat } from "../../actions/SongStateActions"
+import { shuffle as toggleShuffle } from "../../actions/SongActions";
 
 const useStyles = makeStyles({
   root: {
@@ -54,6 +55,7 @@ function BottomPlayer(props) {
     playNext,
     playPrevious,
     timeDrag,
+    shuffle,
     repeatType: repeat,
   } = props
 
@@ -185,10 +187,12 @@ function BottomPlayer(props) {
             <IconButton onClick={playNext} aria-label="play next song">
               <SkipNext />
             </IconButton>
-            <ShuffleIcon
-              className="material-icons"
-              style={{ color: "rgba(0, 0, 0, 0.3)" }}
-            />
+            <IconButton onClick={props.toggleShuffle}>
+              <ShuffleIcon
+                className="material-icons"
+                style={{ opacity: `${shuffle ? 1 : 0.5}` }}
+              />
+            </IconButton>
           </div>
         </div>
       </Paper>
@@ -200,6 +204,7 @@ const mapStateToProps = state => ({
   songs: state.songs,
   playState: state.playState,
   repeatType: state.settings.repeat,
+  shuffle: state.settings.shuffle
 })
 
 BottomPlayer.propTypes = {
@@ -210,13 +215,15 @@ BottomPlayer.propTypes = {
     songId: PropTypes.number.isRequired,
   }).isRequired,
   togglePlaying: PropTypes.func.isRequired,
+  toggleShuffle: PropTypes.func.isRequired,
   duration: PropTypes.number.isRequired,
   playNext: PropTypes.func.isRequired,
   playPrevious: PropTypes.func.isRequired,
   timeDrag: PropTypes.func.isRequired,
   repeatType: PropTypes.number.isRequired,
+  shuffle: PropTypes.bool.isRequired,
 }
 
-export default connect(mapStateToProps, { togglePlaying, changeRepeat })(
+export default connect(mapStateToProps, { togglePlaying, changeRepeat, toggleShuffle })(
   BottomPlayer
 )

@@ -1,4 +1,4 @@
-import { ADD_SONGS, REMOVE_SONGS } from "./types"
+import { ADD_SONGS, REMOVE_SONGS, SHUFFLE } from "./types"
 
 export const addSongs = songs => dispatch => {
   let filteredSongs = [...songs].filter(
@@ -17,5 +17,18 @@ export const removeSong = id => dispatch => {
   dispatch({
     type: REMOVE_SONGS,
     id,
+  })
+}
+
+export const shuffle = () => dispatch => {
+  dispatch({
+    type: SHUFFLE
+  })
+}
+
+export const setShuffle = (shuffle) => dispatch => {
+  dispatch({
+    type: SHUFFLE,
+    shuffle
   })
 }

@@ -24,10 +24,10 @@ const useStyles = makeStyles(theme => ({
     bottom: "0px",
     left: "0px",
     width: "100%",
-    minHeight: "80px",
+    minHeight: "65px",
     "& .now-playing-container": {
       display: "flex",
-      padding: "10px 15px",
+      padding: "10px",
       paddingBottom: "5px",
       "& .song-name": {
         padding: "0px 5px",
