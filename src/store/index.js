@@ -1,7 +1,7 @@
 import { applyMiddleware, createStore, compose } from "redux"
 import thunk from "redux-thunk"
 import * as LocalForage from "localforage"
-import { ADD_SONGS, REPEAT, SET_SHUFFLE } from "../actions/types"
+import { ADD_SONGS, REPEAT, SET_SHUFFLE, TOGGLE_FAVORITE } from "../actions/types"
 
 import rootReducer from "../reducers"
 
@@ -42,6 +42,10 @@ LocalForage.getItem("mySongs").then(state => {
   }
   if (state && state.settings && state.settings.shuffle) {
     store.dispatch({ type: SET_SHUFFLE, shuffle: state.settings.shuffle })
+  }
+  if (state && state.favorites) {
+    const favorites = state.favorites
+    favorites.map(id => store.dispatch({ type: TOGGLE_FAVORITE, id }))
   }
   return {}
 })

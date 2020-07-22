@@ -1,4 +1,4 @@
-import { ADD_SONGS, REMOVE_SONGS, SHUFFLE } from "./types"
+import { ADD_SONGS, REMOVE_SONGS, SHUFFLE, TOGGLE_FAVORITE, ADD_FAVORITES } from "./types"
 
 export const addSongs = songs => dispatch => {
   let filteredSongs = [...songs].filter(
@@ -31,4 +31,13 @@ export const setShuffle = shuffle => dispatch => {
     type: SHUFFLE,
     shuffle,
   })
+}
+
+export const toggleFavorite = id => dispatch => {
+  if (id !== -1) {
+    dispatch({
+      type: TOGGLE_FAVORITE,
+      id
+    })
+  }
 }
