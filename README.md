@@ -61,8 +61,8 @@ $ npm start
 1. Seek progressbar on nowPlayingPage ✅
 1. Let playing song show as playing ✅
 1. Show Time ✅
+1. Shuffle ✅
 1. Deploy to Firebase with travis-ci
-1. Shuffle
 1. Search
 1. Playlists
 1. Equalizer
