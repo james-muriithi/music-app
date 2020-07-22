@@ -1,4 +1,4 @@
-import { TOGGLE_FAVORITE, ADD_FAVORITES } from "../actions/types"
+import { TOGGLE_FAVORITE } from "../actions/types"
 
 const SongStateReducer = (state = [], action) => {
     switch (action.type) {

@@ -64,7 +64,8 @@ $ npm start
 1. Let playing song show as playing ✅
 1. Show Time ✅
 1. Shuffle ✅
-1. Favourite Songs
+1. Favourite Songs ✅
+1. Favourites Page
 1. Deploy to Firebase with travis-ci
 1. Search
 1. Playlists

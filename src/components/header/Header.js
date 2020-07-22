@@ -15,7 +15,8 @@ import HeartIcon from "@material-ui/icons/FavoriteSharp"
 import PlayListIcon from "@material-ui/icons/List"
 import HomeIcon from "@material-ui/icons/Home"
 import SettingsIcon from "@material-ui/icons/Settings"
-import MenuIcon from "@material-ui/icons/Menu"
+import MenuIcon from "@material-ui/icons/Menu";
+import SearchIcon from '@material-ui/icons/Search';
 
 import Logo from "../logo"
 
@@ -92,6 +93,11 @@ export default function Header() {
           <Typography variant="h6" className={classes.title}>
             Music App
           </Typography>
+
+          <IconButton aria-label="search" color="inherit">
+            <SearchIcon style={{fontSize:'27px'}} />
+          </IconButton>
+
         </Toolbar>
       </AppBar>
       <SwipeableDrawer
