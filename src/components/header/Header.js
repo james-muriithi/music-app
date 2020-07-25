@@ -17,7 +17,8 @@ import HomeIcon from "@material-ui/icons/Home"
 import SettingsIcon from "@material-ui/icons/Settings"
 import MenuIcon from "@material-ui/icons/Menu"
 import InputBase from '@material-ui/core/InputBase';
-import CloseIcon from '@material-ui/icons/Close';
+import SearchIcon from '@material-ui/icons/Search';
+import ClearIcon from '@material-ui/icons/Close';
 
 import Logo from "../logo"
 
@@ -80,7 +81,7 @@ const useStyles = makeStyles(theme => ({
     transition: theme.transitions.create('width'),
     width: '100%',
     [ theme.breakpoints.up('sm') ]: {
-      width: '12ch',
+      width: '15ch',
       '&:focus': {
         width: '25ch',
       },
@@ -90,6 +91,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function Header() {
   const [open, setOpen] = useState(false)
+  const [searchTerm, setSearchTerm] = useState('')
 
   const classes = useStyles()
   const menuOptions = [
@@ -127,6 +129,14 @@ export default function Header() {
     setOpen(prevState => !prevState)
   }
 
+  const searchChange = e => {
+    setSearchTerm(e.target.value)
+  }
+
+  const clearInput = () => {
+    setSearchTerm('')
+  }
+
   return (
     <div className={classes.root}>
       <AppBar>
@@ -146,9 +156,9 @@ export default function Header() {
 
           <div className={classes.search}>
             <div className={classes.searchIcon}>
-              <IconButton>
-                <CloseIcon />
-              </IconButton>
+              {searchTerm.trim().length > 0 ? 
+              <IconButton onClick={clearInput}><ClearIcon /></IconButton> 
+              : <IconButton><SearchIcon /></IconButton>}
             </div>
             <InputBase
               placeholder="Search…"
@@ -157,6 +167,8 @@ export default function Header() {
                 input: classes.inputInput,
               }}
               inputProps={{ 'aria-label': 'search' }}
+              onChange={searchChange}
+              value={searchTerm}
             />
           </div>
         </Toolbar>
