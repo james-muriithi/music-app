@@ -50,7 +50,10 @@ const useStyles = makeStyles(theme => ({
       width: 'auto',
     },
     [ theme.breakpoints.down('sm') ]: {
-      width: '22ch',
+      width: '60%',
+    },
+    [ theme.breakpoints.down('xs') ]: {
+      width: '50%',
     },
   },
   searchIcon: {
