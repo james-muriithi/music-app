@@ -27,6 +27,9 @@ const useStyles = makeStyles(theme => ({
   },
   menuButton: {
     marginRight: theme.spacing(2),
+    [theme.breakpoints.down('xs')]:{
+      marginRight: theme.spacing(0),
+    }
   },
   title: {
     flexGrow: 1,
@@ -53,7 +56,7 @@ const useStyles = makeStyles(theme => ({
       width: '60%',
     },
     [ theme.breakpoints.down('xs') ]: {
-      width: '50%',
+      width: '52%',
     },
   },
   searchIcon: {
