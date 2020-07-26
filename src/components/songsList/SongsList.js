@@ -1,8 +1,9 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import PropTypes from "prop-types"
 import List from "@material-ui/core/List"
 import { makeStyles } from "@material-ui/core/styles"
 import { connect } from "react-redux"
+import _ from "lodash"
 
 import Song from "../song/Song"
 
@@ -17,14 +18,28 @@ const useStyles = makeStyles(theme => ({
 }))
 
 function SongsList(props) {
-  const { songs } = props
+  const [songs, setSongs] = useState(props.songs)
+  const { searchTerm } = props
   const classes = useStyles()
+
+  useEffect(() => {
+    if (searchTerm) {
+      let filteredSongs = _.filter(props.songs, song =>
+        song.name.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+      setSongs(filteredSongs)
+    } else {
+      setSongs(props.songs)
+    }
+  }, [searchTerm, props.songs])
 
   if (!songs.length) {
     return (
       <div className={classes.root}>
         <h4 style={{ fontWeight: 300, textAlign: "center" }}>
-          No Songs Present. Please Add Some Songs
+          {searchTerm
+            ? "No song matches your search"
+            : "No Songs Present. Please Add Some Songs"}
         </h4>
       </div>
     )
@@ -46,6 +61,7 @@ const mapStateToProps = state => ({
 
 SongsList.propTypes = {
   songs: PropTypes.array.isRequired,
+  searchTerm: PropTypes.string.isRequired,
 }
 
 export default connect(mapStateToProps, null)(SongsList)

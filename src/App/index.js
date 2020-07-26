@@ -7,12 +7,14 @@ import AddSong from "../components/fab/AddSong"
 import AudioPlayer from "../components/audio/AudioPlayer"
 import keyboardEvents from "../utils/keyboardEvents"
 import { togglePlaying, playSong } from "../actions/SongStateActions"
+import Header from "../components/header/Header"
 import _ from "lodash"
 
 function App(props) {
   const [currentTime, setCurrentTime] = useState(0)
   const [duration, setDuration] = useState(0)
   const [dragTime, setDragTime] = useState(0)
+  const [searchTerm, setSearchTerm] = useState("")
   const { togglePlaying, playState, songs, playSong, shuffle } = props
 
   const { songId } = playState
@@ -69,13 +71,14 @@ function App(props) {
 
   return (
     <Layout>
+      <Header setSearchTerm={setSearchTerm} />
       <AudioPlayer
         setCurrentTime={setCurrentTime}
         setDuration={setDuration}
         dragTime={dragTime}
         playNext={playNext}
       />
-      <SongsList />
+      <SongsList searchTerm={searchTerm} />
       <BottomPlayer
         currentTime={currentTime}
         duration={duration}

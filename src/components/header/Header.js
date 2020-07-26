@@ -16,9 +16,9 @@ import PlayListIcon from "@material-ui/icons/List"
 import HomeIcon from "@material-ui/icons/Home"
 import SettingsIcon from "@material-ui/icons/Settings"
 import MenuIcon from "@material-ui/icons/Menu"
-import InputBase from '@material-ui/core/InputBase';
-import SearchIcon from '@material-ui/icons/Search';
-import ClearIcon from '@material-ui/icons/Close';
+import InputBase from "@material-ui/core/InputBase"
+import SearchIcon from "@material-ui/icons/Search"
+import ClearIcon from "@material-ui/icons/Close"
 
 import Logo from "../logo"
 
@@ -28,9 +28,9 @@ const useStyles = makeStyles(theme => ({
   },
   menuButton: {
     marginRight: theme.spacing(2),
-    [theme.breakpoints.down('xs')]:{
+    [theme.breakpoints.down("xs")]: {
       marginRight: theme.spacing(0),
-    }
+    },
   },
   title: {
     flexGrow: 1,
@@ -42,56 +42,56 @@ const useStyles = makeStyles(theme => ({
     },
   },
   search: {
-    position: 'relative',
+    position: "relative",
     borderRadius: theme.shape.borderRadius,
     backgroundColor: fade(theme.palette.common.white, 0.15),
-    '&:hover': {
+    "&:hover": {
       backgroundColor: fade(theme.palette.common.white, 0.25),
     },
     marginLeft: 0,
-    [ theme.breakpoints.up('sm') ]: {
+    [theme.breakpoints.up("sm")]: {
       marginLeft: theme.spacing(1),
-      width: 'auto',
+      width: "auto",
     },
-    [ theme.breakpoints.down('sm') ]: {
-      width: '60%',
+    [theme.breakpoints.down("sm")]: {
+      width: "60%",
     },
-    [ theme.breakpoints.down('xs') ]: {
-      width: '52%',
+    [theme.breakpoints.down("xs")]: {
+      width: "52%",
     },
   },
   searchIcon: {
-    height: '100%',
-    position: 'absolute',
+    height: "100%",
+    position: "absolute",
     zIndex: 10,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    '& button':{
-      color: '#fff'
-    }
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    "& button": {
+      color: "#fff",
+    },
   },
   inputRoot: {
-    color: 'inherit',
+    color: "inherit",
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),
     // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [ theme.breakpoints.up('sm') ]: {
-      width: '15ch',
-      '&:focus': {
-        width: '25ch',
+    transition: theme.transitions.create("width"),
+    width: "100%",
+    [theme.breakpoints.up("sm")]: {
+      width: "15ch",
+      "&:focus": {
+        width: "25ch",
       },
     },
   },
 }))
 
-export default function Header() {
+export default function Header(props) {
   const [open, setOpen] = useState(false)
-  const [searchTerm, setSearchTerm] = useState('')
+  const [searchTerm, setSearchTerm] = useState("")
 
   const classes = useStyles()
   const menuOptions = [
@@ -131,10 +131,14 @@ export default function Header() {
 
   const searchChange = e => {
     setSearchTerm(e.target.value)
+    const { setSearchTerm: setGlobalSearchTerm } = props
+    setGlobalSearchTerm(e.target.value.trim())
   }
 
   const clearInput = () => {
-    setSearchTerm('')
+    const { setSearchTerm: setGlobalSearchTerm } = props
+    setSearchTerm("")
+    setGlobalSearchTerm("")
   }
 
   return (
@@ -156,9 +160,15 @@ export default function Header() {
 
           <div className={classes.search}>
             <div className={classes.searchIcon}>
-              {searchTerm.trim().length > 0 ? 
-              <IconButton onClick={clearInput}><ClearIcon /></IconButton> 
-              : <IconButton><SearchIcon /></IconButton>}
+              {searchTerm.trim().length > 0 ? (
+                <IconButton onClick={clearInput}>
+                  <ClearIcon />
+                </IconButton>
+              ) : (
+                <IconButton>
+                  <SearchIcon />
+                </IconButton>
+              )}
             </div>
             <InputBase
               placeholder="Search…"
@@ -166,7 +176,7 @@ export default function Header() {
                 root: classes.inputRoot,
                 input: classes.inputInput,
               }}
-              inputProps={{ 'aria-label': 'search' }}
+              inputProps={{ "aria-label": "search" }}
               onChange={searchChange}
               value={searchTerm}
             />
