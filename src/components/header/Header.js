@@ -21,6 +21,7 @@ import SearchIcon from "@material-ui/icons/Search"
 import ClearIcon from "@material-ui/icons/Close"
 
 import Logo from "../logo"
+import { Link } from "gatsby"
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -34,6 +35,11 @@ const useStyles = makeStyles(theme => ({
   },
   title: {
     flexGrow: 1,
+    color: "#f4f4f4",
+    textDecoration: "none",
+    "&:active": {
+      backgroundColor: "transparent",
+    },
   },
   list: {
     width: 250,
@@ -154,33 +160,37 @@ export default function Header(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            Music App
-          </Typography>
+          <Link to="/" className={classes.title}>
+            <Typography variant="h6">Music App</Typography>
+          </Link>
 
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              {searchTerm.trim().length > 0 ? (
-                <IconButton onClick={clearInput}>
-                  <ClearIcon />
-                </IconButton>
-              ) : (
-                <IconButton>
-                  <SearchIcon />
-                </IconButton>
-              )}
+          {props.noSearch ? (
+            ""
+          ) : (
+            <div className={classes.search}>
+              <div className={classes.searchIcon}>
+                {searchTerm.trim().length > 0 ? (
+                  <IconButton onClick={clearInput}>
+                    <ClearIcon />
+                  </IconButton>
+                ) : (
+                  <IconButton>
+                    <SearchIcon />
+                  </IconButton>
+                )}
+              </div>
+              <InputBase
+                placeholder="Search…"
+                classes={{
+                  root: classes.inputRoot,
+                  input: classes.inputInput,
+                }}
+                inputProps={{ "aria-label": "search" }}
+                onChange={searchChange}
+                value={searchTerm}
+              />
             </div>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ "aria-label": "search" }}
-              onChange={searchChange}
-              value={searchTerm}
-            />
-          </div>
+          )}
         </Toolbar>
       </AppBar>
       <SwipeableDrawer
