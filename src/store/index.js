@@ -12,7 +12,7 @@ import rootReducer from "../reducers"
 
 let initialState = {}
 const middleware = [thunk]
-const globalWindow = typeof window !== "undefined" && window
+// const globalWindow = typeof window !== "undefined" && window
 
 export const getInitialState = () => {
   return LocalForage.getItem("mySongs").then(state => {
@@ -28,9 +28,9 @@ const store = createStore(
   initialState,
   compose(
     applyMiddleware(...middleware),
-    globalWindow &&
-      globalWindow.__REDUX_DEVTOOLS_EXTENSION__ &&
-      globalWindow.__REDUX_DEVTOOLS_EXTENSION__()
+    // globalWindow &&
+    //   globalWindow.__REDUX_DEVTOOLS_EXTENSION__ &&
+    //   globalWindow.__REDUX_DEVTOOLS_EXTENSION__()
   )
 )
 
