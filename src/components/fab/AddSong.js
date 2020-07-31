@@ -35,7 +35,7 @@ function AddSong(props) {
           props.addSongs(e.currentTarget.files)
         }}
         multiple
-        accept="audio/mp3,audio/m4a"
+        accept="audio/mp3"
       />
       <AddIcon />
     </Fab>
