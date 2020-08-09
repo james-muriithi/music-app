@@ -66,8 +66,8 @@ $ npm start
 1. Shuffle ✅
 1. Favourite Songs ✅
 1. Favourites Page
-1. Deploy to Firebase with travis-ci
-1. Search
+1. Deploy to Firebase with travis-ci or github actions
+1. Search ✅
 1. Playlists
 1. Equalizer
 
