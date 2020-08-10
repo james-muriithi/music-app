@@ -39,22 +39,22 @@ function Song(props) {
     <>
       {playState.songId === song_id && <SEO title={song.name} />}
       <SwipeableListItem
-      threshold={0.3}
-      background={
-        <>
-          <IconButton>
-            <PlusIcon style={{ color: "#fff" }} />
-          </IconButton>
-          <IconButton
-            onClick={() => {
-              remove(song_id)
-              setAnchorEl(null)
-            }}
-          >
-            <DeleteIcon style={{ color: "#fff" }} />
-          </IconButton>
-        </>
-      }
+        threshold={0.3}
+        background={
+          <>
+            <IconButton>
+              <PlusIcon style={{ color: "#fff" }} />
+            </IconButton>
+            <IconButton
+              onClick={() => {
+                remove(song_id)
+                setAnchorEl(null)
+              }}
+            >
+              <DeleteIcon style={{ color: "#fff" }} />
+            </IconButton>
+          </>
+        }
       >
         <ListItem
           className="song"
@@ -64,7 +64,7 @@ function Song(props) {
             playSong(song_id)
           }}
           ContainerProps={{
-            style:{width: '100%'}
+            style: { width: "100%" },
           }}
         >
           <ListItemAvatar>
@@ -78,7 +78,7 @@ function Song(props) {
           </ListItemSecondaryAction>
         </ListItem>
       </SwipeableListItem>
-      
+
       <Menu
         id="simple-menu"
         anchorEl={anchorEl}
