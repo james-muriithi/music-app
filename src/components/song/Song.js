@@ -10,7 +10,6 @@ import MoreVert from "@material-ui/icons/MoreVert"
 import MusicNote from "@material-ui/icons/MusicNote"
 import Menu from "@material-ui/core/Menu"
 import MenuItem from "@material-ui/core/MenuItem"
-import PlayIcon from "@material-ui/icons/PlayArrowSharp"
 import PlusIcon from "@material-ui/icons/Add"
 import DeleteIcon from "@material-ui/icons/Delete"
 import { connect } from "react-redux"
@@ -19,6 +18,7 @@ import { removeSong } from "../../actions/SongActions"
 import { playSong } from "../../actions/SongStateActions"
 import PlayingAnimation from "../playingAnimation"
 import SEO from "../seo/Seo"
+import SwipeableListItem from "../SwipeableList/SwipeableListItem"
 
 function Song(props) {
   const [anchorEl, setAnchorEl] = useState(null)
@@ -38,33 +38,53 @@ function Song(props) {
   return (
     <>
       {playState.songId === song_id && <SEO title={song.name} />}
-      <ListItem
-        className="song"
-        button={true}
-        divider={true}
-        onClick={() => {
-          playSong(song_id)
-        }}
-      >
-        <ListItemAvatar>
-          <Avatar>{showIcon()}</Avatar>
-        </ListItemAvatar>
-        <ListItemText primary={song.name} secondary={`unknown artist`} />
-        <ListItemSecondaryAction>
-          <IconButton aria-label="Delete" onClick={handleIconClick}>
-            <MoreVert />
+      <SwipeableListItem
+      threshold={0.3}
+      background={
+        <>
+          <IconButton>
+            <PlusIcon style={{ color: "#fff" }} />
           </IconButton>
-        </ListItemSecondaryAction>
-      </ListItem>
+          <IconButton
+            onClick={() => {
+              remove(song_id)
+              setAnchorEl(null)
+            }}
+          >
+            <DeleteIcon style={{ color: "#fff" }} />
+          </IconButton>
+        </>
+      }
+      >
+        <ListItem
+          className="song"
+          button={true}
+          divider={true}
+          onClick={() => {
+            playSong(song_id)
+          }}
+          ContainerProps={{
+            style:{width: '100%'}
+          }}
+        >
+          <ListItemAvatar>
+            <Avatar>{showIcon()}</Avatar>
+          </ListItemAvatar>
+          <ListItemText primary={song.name} secondary={`unknown artist`} />
+          <ListItemSecondaryAction>
+            <IconButton aria-label="Delete" onClick={handleIconClick}>
+              <MoreVert />
+            </IconButton>
+          </ListItemSecondaryAction>
+        </ListItem>
+      </SwipeableListItem>
+      
       <Menu
         id="simple-menu"
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}
         onClose={() => setAnchorEl(null)}
       >
-        <MenuItem>
-          <PlayIcon color="primary" /> Play next
-        </MenuItem>
         <MenuItem>
           <PlusIcon color="primary" /> Add to playlist
         </MenuItem>
