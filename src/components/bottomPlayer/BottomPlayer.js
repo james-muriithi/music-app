@@ -91,10 +91,19 @@ function BottomPlayer(props) {
             <MusicNote style={{ fontSize: "35px" }} />
           </Avatar>
           <div
+            role="button"
+            tabIndex="0"
             className="song-name"
             onClick={() => {
               if (playState.songId !== -1) {
                 setOpen(true)
+              }
+            }}
+            onKeyUp={evt => {
+              if (evt.keyCode === 38) {
+                if (playState.songId !== -1) {
+                  setOpen(true)
+                }
               }
             }}
           >

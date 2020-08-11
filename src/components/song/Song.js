@@ -92,7 +92,12 @@ function Song(props) {
         open={Boolean(anchorEl)}
         onClose={() => setAnchorEl(null)}
       >
-        <MenuItem>
+        <MenuItem
+          onClick={() => {
+            openModal()
+            setAnchorEl(null)
+          }}
+        >
           <PlusIcon color="primary" /> Add to playlist
         </MenuItem>
         <MenuItem
