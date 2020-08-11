@@ -9,6 +9,7 @@ import keyboardEvents from "../utils/keyboardEvents"
 import { togglePlaying, playSong } from "../actions/SongStateActions"
 import Header from "../components/header/Header"
 import _ from "lodash"
+import AddToPlaylist from "../components/addToPlayList/AddToPlaylist"
 
 function App(props) {
   const [currentTime, setCurrentTime] = useState(0)
@@ -87,6 +88,7 @@ function App(props) {
         timeDrag={timeDrag}
       />
       <AddSong />
+      <AddToPlaylist />
     </Layout>
   )
 }
