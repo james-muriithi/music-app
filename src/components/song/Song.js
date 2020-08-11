@@ -26,7 +26,14 @@ function Song(props) {
     setAnchorEl(event.currentTarget)
   }
 
-  const { song, removeSong: remove, song_id, playSong, playState, openAddToPlayListModal: openModal} = props
+  const {
+    song,
+    removeSong: remove,
+    song_id,
+    playSong,
+    playState,
+    openAddToPlayListModal: openModal,
+  } = props
 
   const showIcon = () => {
     if (playState && playState.songId === song_id) {
@@ -42,7 +49,7 @@ function Song(props) {
         threshold={0.3}
         background={
           <>
-            <IconButton onClick={openModal} >
+            <IconButton onClick={openModal}>
               <PlusIcon style={{ color: "#fff" }} />
             </IconButton>
             <IconButton
@@ -107,7 +114,7 @@ Song.protoTypes = {
   song_id: PropTypes.string.isRequired,
   playSong: PropTypes.func.isRequired,
   playState: PropTypes.object.isRequired,
-  openAddToPlayListModal: PropTypes.func.isRequired
+  openAddToPlayListModal: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({

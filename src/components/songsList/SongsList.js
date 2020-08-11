@@ -52,21 +52,23 @@ function SongsList(props) {
   }
 
   const handleClose = () => {
-    setOpen(false);
-  };
+    setOpen(false)
+  }
 
   return (
     <>
       <List className={classes.root}>
         {songs.length &&
           songs.map((song, index) => (
-            <Song openAddToPlayListModal={openDialog} song={song} song_id={index} key={index} />
+            <Song
+              openAddToPlayListModal={openDialog}
+              song={song}
+              song_id={index}
+              key={index}
+            />
           ))}
       </List>
-      <AddToPlaylist
-        open={open}
-        handleClose={handleClose}
-      />
+      <AddToPlaylist open={open} handleClose={handleClose} />
     </>
   )
 }
