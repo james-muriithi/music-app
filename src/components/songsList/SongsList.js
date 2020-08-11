@@ -4,6 +4,7 @@ import List from "@material-ui/core/List"
 import { makeStyles } from "@material-ui/core/styles"
 import { connect } from "react-redux"
 import _ from "lodash"
+import AddToPlaylist from "../addToPlayList/AddToPlaylist"
 
 import Song from "../song/Song"
 
@@ -19,6 +20,7 @@ const useStyles = makeStyles(theme => ({
 
 function SongsList(props) {
   const [songs, setSongs] = useState(props.songs)
+  const [open, setOpen] = useState(false)
   const { searchTerm } = props
   const classes = useStyles()
 
@@ -45,13 +47,27 @@ function SongsList(props) {
     )
   }
 
+  const openDialog = () => {
+    setOpen(true)
+  }
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
-    <List className={classes.root}>
-      {songs.length &&
-        songs.map((song, index) => (
-          <Song song={song} song_id={index} key={index} />
-        ))}
-    </List>
+    <>
+      <List className={classes.root}>
+        {songs.length &&
+          songs.map((song, index) => (
+            <Song openAddToPlayListModal={openDialog} song={song} song_id={index} key={index} />
+          ))}
+      </List>
+      <AddToPlaylist
+        open={open}
+        handleClose={handleClose}
+      />
+    </>
   )
 }
 

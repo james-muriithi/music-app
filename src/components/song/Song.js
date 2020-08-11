@@ -10,7 +10,7 @@ import MoreVert from "@material-ui/icons/MoreVert"
 import MusicNote from "@material-ui/icons/MusicNote"
 import Menu from "@material-ui/core/Menu"
 import MenuItem from "@material-ui/core/MenuItem"
-import PlusIcon from "@material-ui/icons/Add"
+import PlusIcon from "@material-ui/icons/PlaylistAdd"
 import DeleteIcon from "@material-ui/icons/Delete"
 import { connect } from "react-redux"
 
@@ -26,7 +26,7 @@ function Song(props) {
     setAnchorEl(event.currentTarget)
   }
 
-  const { song, removeSong: remove, song_id, playSong, playState } = props
+  const { song, removeSong: remove, song_id, playSong, playState, openAddToPlayListModal: openModal} = props
 
   const showIcon = () => {
     if (playState && playState.songId === song_id) {
@@ -42,7 +42,7 @@ function Song(props) {
         threshold={0.3}
         background={
           <>
-            <IconButton>
+            <IconButton onClick={openModal} >
               <PlusIcon style={{ color: "#fff" }} />
             </IconButton>
             <IconButton
@@ -107,6 +107,7 @@ Song.protoTypes = {
   song_id: PropTypes.string.isRequired,
   playSong: PropTypes.func.isRequired,
   playState: PropTypes.object.isRequired,
+  openAddToPlayListModal: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({

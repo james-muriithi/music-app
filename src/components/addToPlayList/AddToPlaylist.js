@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -29,20 +29,10 @@ const options = [
 ];
 
 function ConfirmationDialogRaw(props) {
-    const { onClose, value: valueProp, open, ...other } = props;
-    const [ value, setValue ] = React.useState(valueProp);
-    const radioGroupRef = React.useRef(null);
-
-    React.useEffect(() => {
-        if (!open) {
-            setValue(valueProp);
-        }
-    }, [ valueProp, open ]);
+    const { onClose, open, handleClickListItem, ...other } = props;
 
     const handleEntering = () => {
-        if (radioGroupRef.current != null) {
-            radioGroupRef.current.focus();
-        }
+        
     };
 
     const handleCancel = () => {
@@ -50,12 +40,9 @@ function ConfirmationDialogRaw(props) {
     };
 
     const handleOk = () => {
-        onClose(value);
+        onClose();
     };
 
-    const handleChange = (event) => {
-        setValue(event.target.value);
-    };
 
     return (
         <Dialog
@@ -66,21 +53,19 @@ function ConfirmationDialogRaw(props) {
             aria-labelledby="confirmation-dialog-title"
             open={open}
             {...other}
-            style={{
-                zIndex: '10000!important'
-            }}
         >
             <DialogTitle id="confirmation-dialog-title">
                 <PlaylistAddIcon style={{marginBottom: '-5px', marginRight: '5px'}} />
                 Add to playlist
             </DialogTitle>
-            <DialogContent dividers>
+            <DialogContent dividers style={{paddingLeft:0,paddingRight:0 }} >
                 <List
                 disablePadding={true}
                 >
-                    <ListItem button>
+                    <ListItem button style={{ paddingLeft: '24px' }} onClick={handleClickListItem} >
                         <ListItemText primary={'Khalid'} />
                     </ListItem>
+
                 </List>                
             </DialogContent>
             <DialogActions>
@@ -98,7 +83,7 @@ function ConfirmationDialogRaw(props) {
 ConfirmationDialogRaw.propTypes = {
     onClose: PropTypes.func.isRequired,
     open: PropTypes.bool.isRequired,
-    value: PropTypes.string.isRequired,
+    handleClickListItem: PropTypes.func.isRequired
 };
 
 const useStyles = makeStyles((theme) => ({
@@ -113,21 +98,20 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function ConfirmationDialog() {
+function AddToPlaylistDialog(props) {
     const classes = useStyles();
-    const [ open, setOpen ] = React.useState(true);
-    const [ value, setValue ] = React.useState('Dione');
+    const [ open, setOpen ] = React.useState(false);
+
+    const {open: globalOpen, handleClose } = props
+
+    useEffect(() => {
+        if (open != globalOpen) {
+            setOpen(globalOpen)
+        }
+    }, [globalOpen])
 
     const handleClickListItem = () => {
         setOpen(false);
-    };
-
-    const handleClose = (newValue) => {
-        setOpen(false);
-
-        if (newValue) {
-            setValue(newValue);
-        }
     };
 
     return (
@@ -139,7 +123,16 @@ export default function ConfirmationDialog() {
             keepMounted
             open={open}
             onClose={handleClose}
-            value={value}
+            handleClickListItem={handleClickListItem}
         />
     );
 }
+
+
+AddToPlaylistDialog.propTypes = {
+    open: PropTypes.bool.isRequired,
+    handleClickListItem: PropTypes.func.isRequired,
+    handleClose: PropTypes.func.isRequired,
+};
+
+export default AddToPlaylistDialog;
