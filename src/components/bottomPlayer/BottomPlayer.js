@@ -91,8 +91,6 @@ function BottomPlayer(props) {
             <MusicNote style={{ fontSize: "35px" }} />
           </Avatar>
           <div
-            role="button"
-            tabIndex="0"
             className="song-name"
             onClick={() => {
               if (playState.songId !== -1) {

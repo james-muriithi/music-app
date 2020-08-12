@@ -65,6 +65,7 @@ $ npm start
 1. Show Time ✅
 1. Shuffle ✅
 1. Favourite Songs ✅
+1. Sont swipe left ✅
 1. Favourites Page
 1. Deploy to Firebase with travis-ci or github actions
 1. Search ✅
