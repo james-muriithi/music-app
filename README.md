@@ -10,7 +10,7 @@
 
 > A simple music player for local audio files built with gatsbyjs, redux, react
 
-[![Build Status](https://travis-ci.org/james-muriithi/music-app.svg?branch=master)](https://travis-ci.org/james-muriithi/music-app)
+![Build and Deploy](https://github.com/james-muriithi/music-app/workflows/Build%20and%20Deploy/badge.svg?branch=master)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 
 [CHECK OUT THE DEMO](https://music-app123.firebaseapp.com/)
