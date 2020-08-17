@@ -5,6 +5,7 @@ const globalNavigator = typeof navigator !== "undefined" && navigator
 const mediaSessionEnabled = globalNavigator
   ? "mediaSession" in globalNavigator
   : false
+
 const addNewSong = id => {
   const state = store.getState()
   const title = state.songs[id].name
@@ -86,7 +87,7 @@ const addActionListeners = () => {
     if (store) store.dispatch({ type: TOGGLE_PLAYING })
   })
 
-  globalNavigator.mediaSession.setActionHandler("seekforwad", () => {
+  globalNavigator.mediaSession.setActionHandler("seekforward", () => {
     console.log('not yet supported');
   });
 
