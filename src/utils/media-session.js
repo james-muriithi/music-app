@@ -85,6 +85,14 @@ const addActionListeners = () => {
   globalNavigator.mediaSession.setActionHandler("pause", () => {
     if (store) store.dispatch({ type: TOGGLE_PLAYING })
   })
+
+  globalNavigator.mediaSession.setActionHandler("seekforwad", () => {
+    console.log('not yet supported');
+  });
+
+  globalNavigator.mediaSession.setActionHandler("seekbackward", () => {
+    console.log('not yet supported');
+  })
 }
 if (mediaSessionEnabled) addActionListeners()
 

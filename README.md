@@ -71,6 +71,7 @@ $ npm start
 1. Search ✅
 1. Playlists
 1. Equalizer
+1. Seek forward and backward
 
 # Licence
 
