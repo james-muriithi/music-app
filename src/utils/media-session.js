@@ -83,14 +83,16 @@ const addActionListeners = () => {
     if (store) store.dispatch({ type: TOGGLE_PLAYING })
   })
 
+// pause song
   globalNavigator.mediaSession.setActionHandler("pause", () => {
     if (store) store.dispatch({ type: TOGGLE_PLAYING })
   })
-
+// forward song
   globalNavigator.mediaSession.setActionHandler("seekforward", () => {
     console.log('not yet supported');
   });
 
+// rewind song
   globalNavigator.mediaSession.setActionHandler("seekbackward", () => {
     console.log('not yet supported');
   })
