@@ -13,6 +13,7 @@ const addNewSong = id => {
   if (title.indexOf(" - ") !== -1) {
     artist = title.split(" - ")[0]
   }
+  // add song metadata
   globalNavigator.mediaSession.metadata = new window.MediaMetadata({
     title,
     artist,
@@ -46,7 +47,7 @@ const addNewSong = id => {
     ],
   })
 }
-
+// play previous
 const addActionListeners = () => {
   globalNavigator.mediaSession.setActionHandler("previoustrack", () => {
     if (store) {
@@ -64,7 +65,7 @@ const addActionListeners = () => {
       }
     }
   })
-
+// play next
   globalNavigator.mediaSession.setActionHandler("nexttrack", () => {
     if (store) {
       const state = store.getState()
@@ -79,6 +80,7 @@ const addActionListeners = () => {
     }
   })
 
+  // play song
   globalNavigator.mediaSession.setActionHandler("play", () => {
     if (store) store.dispatch({ type: TOGGLE_PLAYING })
   })
