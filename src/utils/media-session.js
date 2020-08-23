@@ -6,6 +6,7 @@ const mediaSessionEnabled = globalNavigator
   ? "mediaSession" in globalNavigator
   : false
 
+// add new song
 const addNewSong = id => {
   const state = store.getState()
   const title = state.songs[id].name
