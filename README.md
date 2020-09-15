@@ -8,7 +8,7 @@
   Music App
 </h1>
 
-> A simple music player for local audio files built with gatsbyjs, redux, react
+> A simple music player for local audio files built with gatsbyjs, redux, react, material ui
 
 ![Build and Deploy](https://github.com/james-muriithi/music-app/workflows/Build%20and%20Deploy/badge.svg?branch=master)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
