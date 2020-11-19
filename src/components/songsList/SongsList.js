@@ -7,6 +7,7 @@ import _ from "lodash"
 import AddToPlaylist from "../addToPlayList/AddToPlaylist"
 
 import Song from "../song/Song"
+import NewPlaylist from "../newPlaylist/NewPlaylist"
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -21,6 +22,7 @@ const useStyles = makeStyles(theme => ({
 function SongsList(props) {
   const [songs, setSongs] = useState(props.songs)
   const [open, setOpen] = useState(false)
+  const [newPlaylistModalOpen, setNewPlaylistModalOpen] = useState(false)
   const { searchTerm } = props
   const classes = useStyles()
 
@@ -48,12 +50,21 @@ function SongsList(props) {
   }
 
   const openDialog = () => {
-    console.log(open);
     setOpen(true)
   }
 
   const handleClose = () => {
     setOpen(false)
+  }
+
+  const openNewPlaylistModal = () => {
+    handleClose()
+    setNewPlaylistModalOpen(true)
+  }
+
+  const handleNewPlaylistModalClose = () => {
+    openDialog()
+    setNewPlaylistModalOpen(false)
   }
 
   return (
@@ -69,7 +80,8 @@ function SongsList(props) {
             />
           ))}
       </List>
-      <AddToPlaylist open={open} handleClickListItem={handleClose} handleClose={handleClose} />
+      <AddToPlaylist open={open} handleClickListItem={handleClose} handleNewPlaylist={openNewPlaylistModal} handleClose={handleClose} />
+      <NewPlaylist open={newPlaylistModalOpen} handleClose = {handleNewPlaylistModalClose} />
     </>
   )
 }

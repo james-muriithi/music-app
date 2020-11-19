@@ -29,7 +29,7 @@ const options = [
 ]
 
 function ConfirmationDialogRaw(props) {
-  const { onClose, open, handleClickListItem, ...other } = props
+  const { onClose, open, handleClickListItem, handleNewPlaylist , ...other } = props
 
   const handleEntering = () => { }
 
@@ -37,9 +37,6 @@ function ConfirmationDialogRaw(props) {
     onClose()
   }
 
-  const handleOk = () => {
-    onClose()
-  }
 
   return (
     <Dialog
@@ -66,10 +63,10 @@ function ConfirmationDialogRaw(props) {
         </List>
       </DialogContent>
       <DialogActions>
-        <Button autoFocus onClick={handleCancel} color="secondary">
+        <Button onClick={handleCancel} color="secondary">
           Cancel
         </Button>
-        <Button onClick={handleOk} color="secondary">
+        <Button onClick={handleNewPlaylist} color="secondary">
           New Playlist
         </Button>
       </DialogActions>
@@ -99,7 +96,7 @@ function AddToPlaylistDialog(props) {
   const classes = useStyles()
   const [ open, setOpen ] = React.useState(false)
 
-  const { open: globalOpen, handleClose, handleClickListItem } = props
+  const { open: globalOpen, handleClose, handleClickListItem, handleNewPlaylist } = props
 
   useEffect(() => {
     if (open != globalOpen) {
@@ -117,6 +114,7 @@ function AddToPlaylistDialog(props) {
       open={open}
       onClose={handleClose}
       handleClickListItem={handleClickListItem}
+      handleNewPlaylist={handleNewPlaylist}
     />
   )
 }
@@ -125,6 +123,7 @@ AddToPlaylistDialog.propTypes = {
   open: PropTypes.bool.isRequired,
   handleClickListItem: PropTypes.func.isRequired,
   handleClose: PropTypes.func.isRequired,
+  handleNewPlaylist: PropTypes.func.isRequired,
 }
 
 export default AddToPlaylistDialog
