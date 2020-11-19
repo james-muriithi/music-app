@@ -66,7 +66,7 @@ const addActionListeners = () => {
       }
     }
   })
-// play next
+  // play next
   globalNavigator.mediaSession.setActionHandler("nexttrack", () => {
     if (store) {
       const state = store.getState()
@@ -86,18 +86,18 @@ const addActionListeners = () => {
     if (store) store.dispatch({ type: TOGGLE_PLAYING })
   })
 
-// pause song
+  // pause song
   globalNavigator.mediaSession.setActionHandler("pause", () => {
     if (store) store.dispatch({ type: TOGGLE_PLAYING })
   })
-// forward song
+  // forward song
   globalNavigator.mediaSession.setActionHandler("seekforward", () => {
-    console.log('not yet supported');
-  });
+    console.log("not yet supported")
+  })
 
-// rewind song
+  // rewind song
   globalNavigator.mediaSession.setActionHandler("seekbackward", () => {
-    console.log('not yet supported');
+    console.log("not yet supported")
   })
 }
 if (mediaSessionEnabled) addActionListeners()

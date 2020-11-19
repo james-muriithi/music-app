@@ -48,6 +48,7 @@ function SongsList(props) {
   }
 
   const openDialog = () => {
+    console.log(open);
     setOpen(true)
   }
 
@@ -68,7 +69,7 @@ function SongsList(props) {
             />
           ))}
       </List>
-      <AddToPlaylist open={open} handleClose={handleClose} />
+      <AddToPlaylist open={open} handleClickListItem={handleClose} handleClose={handleClose} />
     </>
   )
 }

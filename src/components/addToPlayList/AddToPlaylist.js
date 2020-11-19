@@ -31,7 +31,7 @@ const options = [
 function ConfirmationDialogRaw(props) {
   const { onClose, open, handleClickListItem, ...other } = props
 
-  const handleEntering = () => {}
+  const handleEntering = () => { }
 
   const handleCancel = () => {
     onClose()
@@ -60,8 +60,7 @@ function ConfirmationDialogRaw(props) {
           <ListItem
             button
             style={{ paddingLeft: "24px" }}
-            onClick={handleClickListItem}
-          >
+            onClick={handleClickListItem}>
             <ListItemText primary={"Khalid"} />
           </ListItem>
         </List>
@@ -98,19 +97,15 @@ const useStyles = makeStyles(theme => ({
 
 function AddToPlaylistDialog(props) {
   const classes = useStyles()
-  const [open, setOpen] = React.useState(false)
+  const [ open, setOpen ] = React.useState(false)
 
-  const { open: globalOpen, handleClose } = props
+  const { open: globalOpen, handleClose, handleClickListItem } = props
 
   useEffect(() => {
     if (open != globalOpen) {
       setOpen(globalOpen)
     }
-  }, [globalOpen])
-
-  const handleClickListItem = () => {
-    setOpen(false)
-  }
+  }, [ globalOpen ])
 
   return (
     <ConfirmationDialogRaw
