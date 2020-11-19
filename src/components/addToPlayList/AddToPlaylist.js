@@ -10,29 +10,34 @@ import List from "@material-ui/core/List"
 import ListItem from "@material-ui/core/ListItem"
 import ListItemText from "@material-ui/core/ListItemText"
 import PlaylistAddIcon from "@material-ui/icons/PlaylistAdd"
+import Typography from "@material-ui/core/Typography"
 import { connect } from "react-redux";
+
+import { addSongToPlaylist } from "../../actions/PlaylistActions";
 
 
 function ConfirmationDialogRaw(props) {
-  const { onClose, open, handleClickListItem, handleNewPlaylist, playlists, ...other } = props
+  const { onClose, open, playlistSong, handleNewPlaylist, addSongToPlaylist, playlists, ...other } = props
 
-  const handleEntering = () => { }
+  const handleClickListItem = (playlist, song) => {
+    if (playlist && song) {
+      addSongToPlaylist(playlist, song)
+    }
+    onClose()
+  }
 
   const handleCancel = () => {
     onClose()
   }
-
-  console.log(playlists);
-
 
   return (
     <Dialog
       disableBackdropClick
       disableEscapeKeyDown
       maxWidth="xs"
-      onEntering={handleEntering}
       aria-labelledby="confirmation-dialog-title"
       open={open}
+      scroll='paper'
       {...other}
     >
       <DialogTitle id="confirmation-dialog-title">
@@ -41,15 +46,19 @@ function ConfirmationDialogRaw(props) {
       </DialogTitle>
       <DialogContent dividers style={{ paddingLeft: 0, paddingRight: 0 }}>
         <List disablePadding={true}>
-          {playlists.length && playlists.map((playlist, index) => (
+          {playlists && Object.keys(playlists).map((playlist, index) => (
             <ListItem
               button
               style={{ paddingLeft: "24px" }}
               key={index}
-              onClick={handleClickListItem}>
+              onClick={() => {
+                handleClickListItem(playlist, playlistSong)
+              }}>
               <ListItemText primary={playlist} />
             </ListItem>
           ))}
+          {Object.keys(playlists).length === 0 &&
+            <Typography style={{ paddingLeft: "24px" }} component="p" color="primary">You have no playlists</Typography>}
         </List>
       </DialogContent>
       <DialogActions>
@@ -67,7 +76,7 @@ function ConfirmationDialogRaw(props) {
 ConfirmationDialogRaw.propTypes = {
   onClose: PropTypes.func.isRequired,
   open: PropTypes.bool.isRequired,
-  handleClickListItem: PropTypes.func.isRequired,
+  addSongToPlaylist: PropTypes.func.isRequired
 }
 
 const useStyles = makeStyles(theme => ({
@@ -86,7 +95,7 @@ function AddToPlaylistDialog(props) {
   const classes = useStyles()
   const [ open, setOpen ] = React.useState(false)
 
-  const { open: globalOpen, handleClose, handleClickListItem, handleNewPlaylist, playlists } = props
+  const { open: globalOpen, handleClose, playlistSong, addSongToPlaylist, handleNewPlaylist, playlists } = props
 
   useEffect(() => {
     if (open != globalOpen) {
@@ -104,8 +113,9 @@ function AddToPlaylistDialog(props) {
       open={open}
       playlists={playlists}
       onClose={handleClose}
-      handleClickListItem={handleClickListItem}
       handleNewPlaylist={handleNewPlaylist}
+      playlistSong={playlistSong}
+      addSongToPlaylist={addSongToPlaylist}
     />
   )
 }
@@ -116,10 +126,11 @@ const mapStateToProps = state => ({
 
 AddToPlaylistDialog.propTypes = {
   open: PropTypes.bool.isRequired,
-  handleClickListItem: PropTypes.func.isRequired,
   handleClose: PropTypes.func.isRequired,
   handleNewPlaylist: PropTypes.func.isRequired,
   playlists: PropTypes.array.isRequired,
+  playlistSong: PropTypes.any,
+  addSongToPlaylist: PropTypes.func.isRequired
 }
 
-export default connect(mapStateToProps, {})(AddToPlaylistDialog)
+export default connect(mapStateToProps, { addSongToPlaylist })(AddToPlaylistDialog)

@@ -23,7 +23,8 @@ function SongsList(props) {
   const [songs, setSongs] = useState(props.songs)
   const [open, setOpen] = useState(false)
   const [newPlaylistModalOpen, setNewPlaylistModalOpen] = useState(false)
-  const { searchTerm } = props
+  const [playlistSong, setPlaylistSong] = useState(null)
+  const { searchTerm, addSongToPlaylist } = props
   const classes = useStyles()
 
   useEffect(() => {
@@ -49,12 +50,21 @@ function SongsList(props) {
     )
   }
 
-  const openDialog = () => {
+  const openDialog = (song = null) => {
     setOpen(true)
+    if (song) {
+      setPlaylistSong(song)
+    }
   }
 
   const handleClose = () => {
     setOpen(false)
+  }
+
+  const addToPlayList = (e) => {
+    // if (selectedPlaylist && playlistSong) {
+    //   addSongToPlaylist(selectedPlaylist, playlistSong)
+    // }
   }
 
   const openNewPlaylistModal = () => {
@@ -73,14 +83,14 @@ function SongsList(props) {
         {songs.length &&
           songs.map((song, index) => (
             <Song
-              openAddToPlayListModal={openDialog}
+              openAddToPlayListModal={()=>{openDialog(song)}}
               song={song}
               song_id={index}
               key={index}
             />
           ))}
       </List>
-      <AddToPlaylist open={open} handleClickListItem={handleClose} handleNewPlaylist={openNewPlaylistModal} handleClose={handleClose} />
+      <AddToPlaylist playlistSong={playlistSong} open={open} handleClickListItem={addToPlayList} handleNewPlaylist={openNewPlaylistModal} handleClose={handleClose} />
       <NewPlaylist open={newPlaylistModalOpen} handleClose = {handleNewPlaylistModalClose} />
     </>
   )
@@ -95,4 +105,4 @@ SongsList.propTypes = {
   searchTerm: PropTypes.string.isRequired,
 }
 
-export default connect(mapStateToProps, null)(SongsList)
+export default connect(mapStateToProps, {})(SongsList)

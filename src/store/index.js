@@ -3,6 +3,7 @@ import thunk from "redux-thunk"
 import * as LocalForage from "localforage"
 import {
   ADD_SONGS,
+  ADD_SONG_TO_PLAYLIST,
   NEW_PLAYLIST,
   REPEAT,
   SET_SHUFFLE,
@@ -12,7 +13,7 @@ import {
 import rootReducer from "../reducers"
 
 let initialState = {}
-const middleware = [thunk]
+const middleware = [ thunk ]
 const globalWindow = typeof window !== "undefined" && window
 
 export const getInitialState = () => {
@@ -30,8 +31,8 @@ const store = createStore(
   compose(
     applyMiddleware(...middleware),
     globalWindow &&
-      globalWindow.__REDUX_DEVTOOLS_EXTENSION__ &&
-      globalWindow.__REDUX_DEVTOOLS_EXTENSION__()
+    globalWindow.__REDUX_DEVTOOLS_EXTENSION__ &&
+    globalWindow.__REDUX_DEVTOOLS_EXTENSION__()
   )
 )
 
@@ -55,7 +56,14 @@ LocalForage.getItem("mySongs").then(state => {
   }
   if (state && state.playlists) {
     const playlists = state.playlists
-    playlists.map(name => store.dispatch({ type: NEW_PLAYLIST, name }))
+    Object.keys(playlists).map((name) => {
+      store.dispatch({ type: NEW_PLAYLIST, name })
+
+      console.log(name);
+
+      playlists[name].map(song => store.dispatch({type: ADD_SONG_TO_PLAYLIST, song, playlist: name}))
+
+    })
   }
   return {}
 })
