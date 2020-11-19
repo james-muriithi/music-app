@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import { makeStyles } from "@material-ui/core/styles"
 import Button from '@material-ui/core/Button';
@@ -7,6 +7,9 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import { connect } from "react-redux";
+
+import { newPlaylist } from "../../actions/PlaylistActions";
 
 
 const useStyles = makeStyles(theme => ({
@@ -24,14 +27,27 @@ const useStyles = makeStyles(theme => ({
 function NewPlaylist(props) {
     const classes = useStyles()
     const [ open, setOpen ] = React.useState(false)
+    const [errorText, setErrorText] = React.useState("");
 
-    const { open: globalOpen, handleClose } = props
+    const playlistName = useRef(null)
+
+    const { open: globalOpen, handleClose, newPlaylist } = props
 
     useEffect(() => {
         if (open !== globalOpen) {
             setOpen(globalOpen)
         }
     }, [ globalOpen ])
+
+    const addNewPlaylist = () => {
+        let name = playlistName.current.value.trim()
+        if(name){
+            newPlaylist(name)
+            playlistName.current.value = ''
+        }else{
+            setErrorText("Please provide a playlist name")
+        }
+    }
 
     return (
         <Dialog
@@ -48,13 +64,20 @@ function NewPlaylist(props) {
                     label="Name"
                     type="text"
                     fullWidth
+                    helperText={errorText}
+                    error ={errorText.length === 0 ? false : true }
+                    inputProps={{ref: playlistName}}
+                    autoComplete='off'
+                    onChange={e => {
+                        setErrorText('');
+                    }}
                 />
             </DialogContent>
             <DialogActions>
                 <Button onClick={handleClose} color="secondary">
                     Cancel
               </Button>
-                <Button onClick={handleClose} color="secondary">
+                <Button onClick={addNewPlaylist} color="secondary">
                     Create playlist
               </Button>
             </DialogActions>
@@ -63,10 +86,12 @@ function NewPlaylist(props) {
     );
 }
 
+
 NewPlaylist.propTypes = {
     open: PropTypes.bool.isRequired,
     handleClose: PropTypes.func.isRequired,
+    newPlaylist: PropTypes.func.isRequired
 }
 
-export default NewPlaylist
+export default connect(null, {newPlaylist})(NewPlaylist)
 

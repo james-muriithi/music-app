@@ -10,32 +10,19 @@ import List from "@material-ui/core/List"
 import ListItem from "@material-ui/core/ListItem"
 import ListItemText from "@material-ui/core/ListItemText"
 import PlaylistAddIcon from "@material-ui/icons/PlaylistAdd"
+import { connect } from "react-redux";
 
-const options = [
-  "None",
-  "Atria",
-  "Callisto",
-  "Dione",
-  "Ganymede",
-  "Hangouts Call",
-  "Luna",
-  "Oberon",
-  "Phobos",
-  "Pyxis",
-  "Sedna",
-  "Titania",
-  "Triton",
-  "Umbriel",
-]
 
 function ConfirmationDialogRaw(props) {
-  const { onClose, open, handleClickListItem, handleNewPlaylist , ...other } = props
+  const { onClose, open, handleClickListItem, handleNewPlaylist, playlists, ...other } = props
 
   const handleEntering = () => { }
 
   const handleCancel = () => {
     onClose()
   }
+
+  console.log(playlists);
 
 
   return (
@@ -54,12 +41,15 @@ function ConfirmationDialogRaw(props) {
       </DialogTitle>
       <DialogContent dividers style={{ paddingLeft: 0, paddingRight: 0 }}>
         <List disablePadding={true}>
-          <ListItem
-            button
-            style={{ paddingLeft: "24px" }}
-            onClick={handleClickListItem}>
-            <ListItemText primary={"Khalid"} />
-          </ListItem>
+          {playlists.length && playlists.map((playlist, index) => (
+            <ListItem
+              button
+              style={{ paddingLeft: "24px" }}
+              key={index}
+              onClick={handleClickListItem}>
+              <ListItemText primary={playlist} />
+            </ListItem>
+          ))}
         </List>
       </DialogContent>
       <DialogActions>
@@ -96,7 +86,7 @@ function AddToPlaylistDialog(props) {
   const classes = useStyles()
   const [ open, setOpen ] = React.useState(false)
 
-  const { open: globalOpen, handleClose, handleClickListItem, handleNewPlaylist } = props
+  const { open: globalOpen, handleClose, handleClickListItem, handleNewPlaylist, playlists } = props
 
   useEffect(() => {
     if (open != globalOpen) {
@@ -112,6 +102,7 @@ function AddToPlaylistDialog(props) {
       id="ringtone-menu"
       keepMounted
       open={open}
+      playlists={playlists}
       onClose={handleClose}
       handleClickListItem={handleClickListItem}
       handleNewPlaylist={handleNewPlaylist}
@@ -119,11 +110,16 @@ function AddToPlaylistDialog(props) {
   )
 }
 
+const mapStateToProps = state => ({
+  playlists: state.playlists,
+})
+
 AddToPlaylistDialog.propTypes = {
   open: PropTypes.bool.isRequired,
   handleClickListItem: PropTypes.func.isRequired,
   handleClose: PropTypes.func.isRequired,
   handleNewPlaylist: PropTypes.func.isRequired,
+  playlists: PropTypes.array.isRequired,
 }
 
-export default AddToPlaylistDialog
+export default connect(mapStateToProps, {})(AddToPlaylistDialog)
