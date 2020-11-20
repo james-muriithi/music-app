@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import PropTypes from "prop-types"
 import { makeStyles } from "@material-ui/core/styles"
 import Button from "@material-ui/core/Button"
@@ -9,6 +9,7 @@ import DialogContent from "@material-ui/core/DialogContent"
 import DialogTitle from "@material-ui/core/DialogTitle"
 import { connect } from "react-redux"
 
+import Snackbar from "../alert/ShowSnackbar"
 import { newPlaylist } from "../../actions/PlaylistActions"
 
 const useStyles = makeStyles(theme => ({
@@ -27,6 +28,9 @@ function NewPlaylist(props) {
   const classes = useStyles()
   const [open, setOpen] = React.useState(false)
   const [errorText, setErrorText] = React.useState("")
+  const [toastMessage, setToastMessage] = useState("")
+  const [toastSeverity, setToastSeverity] = useState("success")
+  const [alertOpen, setAlertOpen] = useState(false)
 
   const playlistName = useRef(null)
 
@@ -43,48 +47,58 @@ function NewPlaylist(props) {
     if (name) {
       newPlaylist(name)
       playlistName.current.value = ""
+      handleClose()
+      setToastMessage("Playlist added successfully")
+      setAlertOpen(true)
     } else {
       setErrorText("Please provide a playlist name")
     }
   }
 
   return (
-    <Dialog
-      maxWidth="xs"
-      classes={{
-        paper: classes.paper,
-      }}
-      open={open}
-      onClose={handleClose}
-      aria-labelledby="form-dialog-title"
-    >
-      <DialogTitle id="form-dialog-title">New Playlist</DialogTitle>
-      <DialogContent>
-        <TextField
-          autoFocus
-          margin="dense"
-          id="name"
-          label="Name"
-          type="text"
-          fullWidth
-          helperText={errorText}
-          error={errorText.length === 0 ? false : true}
-          inputProps={{ ref: playlistName }}
-          autoComplete="off"
-          onChange={e => {
-            setErrorText("")
-          }}
-        />
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={handleClose} color="secondary">
-          Cancel
-        </Button>
-        <Button onClick={addNewPlaylist} color="secondary">
-          Create playlist
-        </Button>
-      </DialogActions>
-    </Dialog>
+    <>
+      <Dialog
+        maxWidth="xs"
+        classes={{
+          paper: classes.paper,
+        }}
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="form-dialog-title"
+      >
+        <DialogTitle id="form-dialog-title">New Playlist</DialogTitle>
+        <DialogContent>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Name"
+            type="text"
+            fullWidth
+            helperText={errorText}
+            error={errorText.length === 0 ? false : true}
+            inputProps={{ ref: playlistName }}
+            autoComplete="off"
+            onChange={e => {
+              setErrorText("")
+            }}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="secondary">
+            Cancel
+          </Button>
+          <Button onClick={addNewPlaylist} color="secondary">
+            Create playlist
+          </Button>
+        </DialogActions>
+      </Dialog>
+      <Snackbar
+        open={alertOpen}
+        message={toastMessage}
+        severity={toastSeverity}
+      />
+    </>
   )
 }
 
