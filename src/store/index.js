@@ -13,8 +13,8 @@ import {
 import rootReducer from "../reducers"
 
 let initialState = {}
-const middleware = [ thunk ]
-const globalWindow = typeof window !== "undefined" && window
+const middleware = [thunk]
+// const globalWindow = typeof window !== "undefined" && window
 
 export const getInitialState = () => {
   return LocalForage.getItem("mySongs").then(state => {
@@ -29,10 +29,10 @@ const store = createStore(
   rootReducer,
   initialState,
   compose(
-    applyMiddleware(...middleware),
-    globalWindow &&
-    globalWindow.__REDUX_DEVTOOLS_EXTENSION__ &&
-    globalWindow.__REDUX_DEVTOOLS_EXTENSION__()
+    applyMiddleware(...middleware)
+    //   globalWindow &&
+    //   globalWindow.__REDUX_DEVTOOLS_EXTENSION__ &&
+    //   globalWindow.__REDUX_DEVTOOLS_EXTENSION__()
   )
 )
 
@@ -56,13 +56,14 @@ LocalForage.getItem("mySongs").then(state => {
   }
   if (state && state.playlists) {
     const playlists = state.playlists
-    Object.keys(playlists).map((name) => {
+    Object.keys(playlists).map(name => {
       store.dispatch({ type: NEW_PLAYLIST, name })
 
-      console.log(name);
+      console.log(name)
 
-      playlists[name].map(song => store.dispatch({type: ADD_SONG_TO_PLAYLIST, song, playlist: name}))
-
+      playlists[name].map(song =>
+        store.dispatch({ type: ADD_SONG_TO_PLAYLIST, song, playlist: name })
+      )
     })
   }
   return {}

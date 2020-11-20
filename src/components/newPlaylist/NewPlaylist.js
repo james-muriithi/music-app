@@ -1,97 +1,97 @@
-import React, { useEffect, useRef } from 'react'
-import PropTypes from 'prop-types'
+import React, { useEffect, useRef } from "react"
+import PropTypes from "prop-types"
 import { makeStyles } from "@material-ui/core/styles"
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import { connect } from "react-redux";
+import Button from "@material-ui/core/Button"
+import TextField from "@material-ui/core/TextField"
+import Dialog from "@material-ui/core/Dialog"
+import DialogActions from "@material-ui/core/DialogActions"
+import DialogContent from "@material-ui/core/DialogContent"
+import DialogTitle from "@material-ui/core/DialogTitle"
+import { connect } from "react-redux"
 
-import { newPlaylist } from "../../actions/PlaylistActions";
-
+import { newPlaylist } from "../../actions/PlaylistActions"
 
 const useStyles = makeStyles(theme => ({
-    root: {
-        width: "100%",
-        maxWidth: 360,
-        backgroundColor: theme.palette.background.paper,
-    },
-    paper: {
-        width: "80%",
-        maxHeight: 435,
-    },
+  root: {
+    width: "100%",
+    maxWidth: 360,
+    backgroundColor: theme.palette.background.paper,
+  },
+  paper: {
+    width: "80%",
+    maxHeight: 435,
+  },
 }))
 
 function NewPlaylist(props) {
-    const classes = useStyles()
-    const [ open, setOpen ] = React.useState(false)
-    const [errorText, setErrorText] = React.useState("");
+  const classes = useStyles()
+  const [open, setOpen] = React.useState(false)
+  const [errorText, setErrorText] = React.useState("")
 
-    const playlistName = useRef(null)
+  const playlistName = useRef(null)
 
-    const { open: globalOpen, handleClose, newPlaylist } = props
+  const { open: globalOpen, handleClose, newPlaylist } = props
 
-    useEffect(() => {
-        if (open !== globalOpen) {
-            setOpen(globalOpen)
-        }
-    }, [ globalOpen ])
-
-    const addNewPlaylist = () => {
-        let name = playlistName.current.value.trim()
-        if(name){
-            newPlaylist(name)
-            playlistName.current.value = ''
-        }else{
-            setErrorText("Please provide a playlist name")
-        }
+  useEffect(() => {
+    if (open !== globalOpen) {
+      setOpen(globalOpen)
     }
+  }, [globalOpen])
 
-    return (
-        <Dialog
-            maxWidth="xs"
-            classes={{
-                paper: classes.paper,
-            }} open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-            <DialogTitle id="form-dialog-title">New Playlist</DialogTitle>
-            <DialogContent>
-                <TextField
-                    autoFocus
-                    margin="dense"
-                    id="name"
-                    label="Name"
-                    type="text"
-                    fullWidth
-                    helperText={errorText}
-                    error ={errorText.length === 0 ? false : true }
-                    inputProps={{ref: playlistName}}
-                    autoComplete='off'
-                    onChange={e => {
-                        setErrorText('');
-                    }}
-                />
-            </DialogContent>
-            <DialogActions>
-                <Button onClick={handleClose} color="secondary">
-                    Cancel
-              </Button>
-                <Button onClick={addNewPlaylist} color="secondary">
-                    Create playlist
-              </Button>
-            </DialogActions>
-        </Dialog>
+  const addNewPlaylist = () => {
+    let name = playlistName.current.value.trim()
+    if (name) {
+      newPlaylist(name)
+      playlistName.current.value = ""
+    } else {
+      setErrorText("Please provide a playlist name")
+    }
+  }
 
-    );
+  return (
+    <Dialog
+      maxWidth="xs"
+      classes={{
+        paper: classes.paper,
+      }}
+      open={open}
+      onClose={handleClose}
+      aria-labelledby="form-dialog-title"
+    >
+      <DialogTitle id="form-dialog-title">New Playlist</DialogTitle>
+      <DialogContent>
+        <TextField
+          autoFocus
+          margin="dense"
+          id="name"
+          label="Name"
+          type="text"
+          fullWidth
+          helperText={errorText}
+          error={errorText.length === 0 ? false : true}
+          inputProps={{ ref: playlistName }}
+          autoComplete="off"
+          onChange={e => {
+            setErrorText("")
+          }}
+        />
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={handleClose} color="secondary">
+          Cancel
+        </Button>
+        <Button onClick={addNewPlaylist} color="secondary">
+          Create playlist
+        </Button>
+      </DialogActions>
+    </Dialog>
+  )
 }
-
 
 NewPlaylist.propTypes = {
-    open: PropTypes.bool.isRequired,
-    handleClose: PropTypes.func.isRequired,
-    newPlaylist: PropTypes.func.isRequired
+  open: PropTypes.bool.isRequired,
+  handleClose: PropTypes.func.isRequired,
+  newPlaylist: PropTypes.func.isRequired,
 }
 
-export default connect(null, {newPlaylist})(NewPlaylist)
-
+export default connect(null, { newPlaylist })(NewPlaylist)

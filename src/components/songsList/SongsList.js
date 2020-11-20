@@ -61,7 +61,7 @@ function SongsList(props) {
     setOpen(false)
   }
 
-  const addToPlayList = (e) => {
+  const addToPlayList = e => {
     // if (selectedPlaylist && playlistSong) {
     //   addSongToPlaylist(selectedPlaylist, playlistSong)
     // }
@@ -83,15 +83,26 @@ function SongsList(props) {
         {songs.length &&
           songs.map((song, index) => (
             <Song
-              openAddToPlayListModal={()=>{openDialog(song)}}
+              openAddToPlayListModal={() => {
+                openDialog(song)
+              }}
               song={song}
               song_id={index}
               key={index}
             />
           ))}
       </List>
-      <AddToPlaylist playlistSong={playlistSong} open={open} handleClickListItem={addToPlayList} handleNewPlaylist={openNewPlaylistModal} handleClose={handleClose} />
-      <NewPlaylist open={newPlaylistModalOpen} handleClose = {handleNewPlaylistModalClose} />
+      <AddToPlaylist
+        playlistSong={playlistSong}
+        open={open}
+        handleClickListItem={addToPlayList}
+        handleNewPlaylist={openNewPlaylistModal}
+        handleClose={handleClose}
+      />
+      <NewPlaylist
+        open={newPlaylistModalOpen}
+        handleClose={handleNewPlaylistModalClose}
+      />
     </>
   )
 }
